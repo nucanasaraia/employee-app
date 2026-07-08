@@ -4,6 +4,7 @@ import { Route, Router } from '@angular/router';
 import { Train } from 'src/app/models/train.model';
 import { AlertService } from 'src/app/services/alert.service';
 import { ConfirmService } from 'src/app/services/confirm.service';
+import { ExcelService } from 'src/app/services/excel.service';
 import { RailwayService } from 'src/app/services/railway.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class RailwayListComponent implements OnInit {
     private svc: RailwayService, 
     private router: Router,
     private alert: AlertService,
-    private confirmService: ConfirmService
+    private confirmService: ConfirmService,
+    private excel: ExcelService,
   ) {}
 
   ngOnInit() { this.load(); }
@@ -62,5 +64,21 @@ export class RailwayListComponent implements OnInit {
     },
     error: () => this.alert.error('Failed to delete train schedule.')
   });
+}
+
+
+exportTrains() {
+  const data = this.filteredTrains.map(t => ({
+    'ID':               t.id,
+    'Direction':        t.direction,
+    'Departure':        t.departure,
+    'Arrival':          t.arrival,
+    'Travel Time':      t.travelTime,
+    'Trip Number':      t.tripNumber,
+    'Tickets':          t.tickets
+  }));
+
+  this.excel.exportToExcel(data, 'TrainSchedule', 'Trains');
+  this.alert.success('Train schedule exported to Excel!');
 }
 }

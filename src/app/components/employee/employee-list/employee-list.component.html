@@ -2,10 +2,15 @@
   <div class="page-header">
     <h2>Employee Management</h2>
     <div class="controls">
-      <input [(ngModel)]="searchTerm" (input)="search()"
-             placeholder="Search by name, email or position..."
-             class="search-input" />
+      <input [(ngModel)]="searchTerm" (input)="search()" placeholder="Search by name, email or position..."
+        class="search-input" />
       <button (click)="clearSearch()" class="btn btn-clear">Clear</button>
+
+      <button (click)="exportEmployees()" class="btn btn-excel" title="Export to Excel">
+        <img src="assets/images/excel-icon.png" alt="Excel" style="height:16px; width:16px; margin-right:6px;" />
+        Export
+      </button>
+
       <button (click)="goToAdd()" class="btn btn-add">+ Add Employee</button>
     </div>
   </div>
@@ -37,8 +42,8 @@
         </td>
         <td class="actions">
           <button (click)="goToDetail(e.id!)" class="btn btn-view">View</button>
-          <button (click)="goToEdit(e.id!)"   class="btn btn-edit">Edit</button>
-          <button (click)="delete(e.id!)"     class="btn btn-del">Deactivate</button>
+          <button (click)="goToEdit(e.id!)" class="btn btn-edit">Edit</button>
+          <button (click)="delete(e.id!)" class="btn btn-del">Deactivate</button>
         </td>
       </tr>
     </tbody>
@@ -81,9 +86,13 @@
   </div>
 
   <!-- History -->
-  <div class="section-toggle">
+  <div class="section-toggle" style="display:flex; gap:10px; align-items:center;">
     <button (click)="toggleHistory()" class="btn btn-toggle">
       {{ showHistory ? 'Hide History' : 'Show All (Including Deactivated)' }}
+    </button>
+    <button (click)="exportHistory()" *ngIf="showHistory" class="btn btn-excel">
+      <img src="assets/images/excel-icon.png" alt="Excel" style="height:16px; width:16px; margin-right:6px;" />
+      Export History
     </button>
   </div>
 

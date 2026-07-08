@@ -5,6 +5,7 @@ import { EmployeeService } from '../../../services/employee.service';
 import { EmployeeLog } from 'src/app/models/employee-log.model';
 import { AlertService } from 'src/app/services/alert.service';
 import { ConfirmService } from 'src/app/services/confirm.service';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -25,7 +26,8 @@ constructor(
   private svc: EmployeeService,
   private router: Router,
   private alert: AlertService,
-  private confirmService: ConfirmService  
+  private confirmService: ConfirmService,
+  private excel: ExcelService   
 ) {}
   ngOnInit() { this.load(); }
 
@@ -76,6 +78,38 @@ constructor(
     error: () => this.alert.error('Failed to delete employee.')
   });
 }
+
+
+//excel
+exportEmployees() {
+  const data = this.filteredEmployees.map(e => ({
+    'ID':       e.id,
+    'Name':     e.name,
+    'Email':    e.email,
+    'Position': e.position,
+    'Salary':   e.salary,
+    'Status':   e.isActive ? 'Active' : 'Inactive'
+  }));
+
+  this.excel.exportToExcel(data, 'Employees', 'Employees');
+  this.alert.success('Employees exported to Excel!');
+}
+
+exportHistory() {
+  const data = this.historyEmployees.map(e => ({
+    'ID':       e.id,
+    'Name':     e.name,
+    'Email':    e.email,
+    'Position': e.position,
+    'Salary':   e.salary,
+    'Status':   e.isActive ? 'Active' : 'Inactive'
+  }));
+
+  this.excel.exportToExcel(data, 'Employees_History', 'History');
+  this.alert.success('History exported to Excel!');
+}
+
+
 
   toggleLogs() {
   this.showLogs = !this.showLogs;

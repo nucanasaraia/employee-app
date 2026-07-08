@@ -22,7 +22,7 @@ export class AlertService {
   }
 
   remove(id: number) {
-    this.alertList = this.alertList.filter(a => a.id !== id);
+    this.alertList = this.alertList.filter(a => a.id !== id);//Keep every alert except the one whose ID is 2
     this.alerts$.next(this.alertList);
   }
 

@@ -83,3 +83,20 @@
 .btn-add  { background: #333; color: #fff; border-radius: 20px; padding: 8px 20px; }
 .btn-edit   { background: #f0f0f0; color: #333; }
 .btn-del    { background: #fdecea; color: #c62828; }
+
+.btn-excel {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: #1d6f42;
+  border: 1px solid #1d6f42;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-excel:hover {
+  background: #1d6f42;
+  color: #fff;
+}
