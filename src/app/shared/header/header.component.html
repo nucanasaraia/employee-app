@@ -1,0 +1,14 @@
+<header class="header">
+  <div class="header-inner">
+    <div class="logo" (click)="goHome()">
+      <img src="assets/images/logoo.png" alt="Georgian Travel Platform" class="logo-img" />
+    </div>
+
+    <nav class="nav">
+      <select (change)="onPageChange($event)" [(ngModel)]="selectedPage" class="nav-select">
+        <option value="employees">Employee Management</option>
+        <option value="railway">Railway Schedule</option>
+      </select>
+    </nav>
+  </div>
+</header>

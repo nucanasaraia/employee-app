@@ -1,0 +1,64 @@
+<div class="form-page">
+  <h2>{{ editingId ? 'Edit' : 'Add' }} Train Schedule</h2>
+
+  <div class="form-card">
+
+    <!-- Direction -->
+    <div class="field">
+      <label>Directions</label>
+      <select [(ngModel)]="form.direction"
+              [style.border]="errors.direction ? '1px solid red' : '1px solid #ddd'"
+              class="input">
+        <option value="">Select direction</option>
+        <option *ngFor="let d of directions" [value]="d.value">{{ d.label }}</option>
+      </select>
+      <small *ngIf="errors.direction" class="error">{{ errors.direction }}</small>
+    </div>
+
+    <!-- Departure -->
+    <div class="field">
+      <label>Departure</label>
+      <input [(ngModel)]="form.departure" type="time" class="input"
+             [style.border]="errors.departure ? '1px solid red' : '1px solid #ddd'" />
+      <small *ngIf="errors.departure" class="error">{{ errors.departure }}</small>
+    </div>
+
+    <!-- Arrival -->
+    <div class="field">
+      <label>Arrival</label>
+      <input [(ngModel)]="form.arrival" type="time" class="input"
+             [style.border]="errors.arrival ? '1px solid red' : '1px solid #ddd'" />
+      <small *ngIf="errors.arrival" class="error">{{ errors.arrival }}</small>
+    </div>
+
+    <!-- Destination Time -->
+    <div class="field">
+      <label>Destination Time</label>
+      <input [(ngModel)]="form.travelTime" placeholder="e.g. 5 hours 12 minutes" class="input"
+             [style.border]="errors.travelTime ? '1px solid red' : '1px solid #ddd'" />
+      <small *ngIf="errors.travelTime" class="error">{{ errors.travelTime }}</small>
+    </div>
+
+    <!-- Flight Number -->
+    <div class="field">
+      <label>Train Number</label>
+      <input [(ngModel)]="form.tripNumber" placeholder="e.g. 870" class="input"
+             [style.border]="errors.tripNumber ? '1px solid red' : '1px solid #ddd'" />
+      <small *ngIf="errors.tripNumber" class="error">{{ errors.tripNumber }}</small>
+    </div>
+
+    <!-- Tickets -->
+    <div class="field">
+      <label>Tickets</label>
+      <input [(ngModel)]="form.tickets" type="number" placeholder="Number of tickets" class="input"
+             [style.border]="errors.tickets ? '1px solid red' : '1px solid #ddd'" />
+      <small *ngIf="errors.tickets" class="error">{{ errors.tickets }}</small>
+    </div>
+
+    <div class="form-actions">
+      <button (click)="save()"   class="btn btn-save">{{ editingId ? 'Update' : 'Add Schedule' }}</button>
+      <button (click)="cancel()" class="btn btn-cancel">Cancel</button>
+    </div>
+
+  </div>
+</div>

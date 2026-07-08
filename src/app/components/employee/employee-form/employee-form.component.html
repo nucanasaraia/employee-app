@@ -1,0 +1,51 @@
+<div style="max-width:600px; margin:auto; font-family:sans-serif; padding:16px;">
+  <h2>{{ editingId ? 'Edit' : 'Add' }} Employee</h2>
+
+  <div style="background:#f4f4f4; padding:20px; border-radius:8px;">
+
+    <!-- Name -->
+    <div style="margin-bottom:12px;">
+      <label style="display:block; margin-bottom:4px; font-weight:bold;">Full Name</label>
+      <input [(ngModel)]="form.name" placeholder="Full Name"
+             style="width:100%; padding:8px; box-sizing:border-box;"
+             [style.border]="errors.name ? '1px solid red' : '1px solid #ccc'" />
+      <small *ngIf="errors.name" style="color:red;">{{ errors.name }}</small>
+    </div>
+
+    <!-- Email -->
+    <div style="margin-bottom:12px;">
+      <label style="display:block; margin-bottom:4px; font-weight:bold;">Email</label>
+      <input [(ngModel)]="form.email" placeholder="Email Address"
+             style="width:100%; padding:8px; box-sizing:border-box;"
+             [style.border]="errors.email ? '1px solid red' : '1px solid #ccc'" />
+      <small *ngIf="errors.email" style="color:red;">{{ errors.email }}</small>
+    </div>
+
+    <!-- Position -->
+    <div style="margin-bottom:12px;">
+      <label style="display:block; margin-bottom:4px; font-weight:bold;">Position</label>
+      <input [(ngModel)]="form.position" placeholder="Position"
+             style="width:100%; padding:8px; box-sizing:border-box;"
+             [style.border]="errors.position ? '1px solid red' : '1px solid #ccc'" />
+      <small *ngIf="errors.position" style="color:red;">{{ errors.position }}</small>
+    </div>
+
+    <!-- Salary -->
+    <div style="margin-bottom:20px;">
+      <label style="display:block; margin-bottom:4px; font-weight:bold;">Salary</label>
+      <input [(ngModel)]="form.salary" placeholder="Salary" type="number"
+             style="width:100%; padding:8px; box-sizing:border-box;"
+             [style.border]="errors.salary ? '1px solid red' : '1px solid #ccc'" />
+      <small *ngIf="errors.salary" style="color:red;">{{ errors.salary }}</small>
+    </div>
+
+    <button (click)="save()"
+            style="padding:8px 24px; background:#333; color:#fff; border:none; border-radius:4px; cursor:pointer; margin-right:8px;">
+      {{ editingId ? 'Update' : 'Add Employee' }}
+    </button>
+    <button (click)="cancel()"
+            style="padding:8px 24px; background:#999; color:#fff; border:none; border-radius:4px; cursor:pointer;">
+      Cancel
+    </button>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Employee } from '../../../models/employee.model';
+import { EmployeeService } from '../../../services/employee.service';
+import { EmployeeLog } from 'src/app/models/employee-log.model';
+import { AlertService } from 'src/app/services/alert.service';
+import { ConfirmService } from 'src/app/services/confirm.service';
+
+@Component({
+  selector: 'app-employee-list',
+  templateUrl: './employee-list.component.html',
+  styleUrls: ['./employee-list.component.css']
+})
+export class EmployeeListComponent implements OnInit {
+  employees: Employee[] = [];
+  filteredEmployees: Employee[] = [];
+  historyEmployees: Employee[] = [];
+  searchTerm: string = '';
+  showHistory: boolean = false;
+  logs: EmployeeLog[] = [];
+  showLogs: boolean = false;
+
+
+constructor(
+  private svc: EmployeeService,
+  private router: Router,
+  private alert: AlertService,
+  private confirmService: ConfirmService  
+) {}
+  ngOnInit() { this.load(); }
+
+  load() {
+    this.svc.getAll().subscribe(data => {
+      this.employees = data;
+      this.filteredEmployees = data;
+    });
+  }
+
+  search() {
+    const term = this.searchTerm.toLowerCase().trim();
+    this.filteredEmployees = !term ? this.employees
+      : this.employees.filter(e =>
+          e.name.toLowerCase().includes(term) ||
+          e.email.toLowerCase().includes(term) ||
+          e.position!.toLowerCase().includes(term)
+        );
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
+    this.filteredEmployees = this.employees;
+  }
+
+  toggleHistory() {
+    this.showHistory = !this.showHistory;
+    if (this.showHistory) {
+      this.svc.getAllWithHistory().subscribe(data => {
+        this.historyEmployees = data;
+      });
+    }
+  }
+
+  goToAdd()            { this.router.navigate(['/employees/add']); }
+  goToEdit(id: number) { this.router.navigate(['/employees/edit', id]); }
+  goToDetail(id:number){ this.router.navigate(['/employees/detail', id]); }
+
+ async delete(id: number) {
+  const confirmed = await this.confirmService.confirm('Delete this employee?');
+  if (!confirmed) return;
+
+  this.svc.delete(id).subscribe({
+    next: () => {
+      this.alert.success('Employee deleted.');
+      this.load();
+    },
+    error: () => this.alert.error('Failed to delete employee.')
+  });
+}
+
+  toggleLogs() {
+  this.showLogs = !this.showLogs;
+  if (this.showLogs) {
+    this.svc.getAllLogs().subscribe(data => {
+      this.logs = data;
+    });
+  }
+}
+
+getActionColor(action: string): string {
+  switch(action) {
+    case 'ADD':        return '#4CAF50';   
+    case 'UPDATE':     return '#FF9800';   
+    case 'DEACTIVATE': return '#f44336';   
+    case 'VIEW':       return '#2196F3';   
+    default:           return '#999';
+  }
+}
+}

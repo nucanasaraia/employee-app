@@ -1,0 +1,46 @@
+<div class="page">
+  <div class="page-header">
+    <h2>Train Schedule</h2>
+    <div class="controls">
+      <select [(ngModel)]="selectedDirection"
+              (change)="filterByDirection()"
+              class="direction-select">
+        <option *ngFor="let d of directions" [value]="d.value">
+          {{ d.label }}
+        </option>
+      </select>
+      <button (click)="goToAdd()" class="btn btn-add">+ Add Schedule</button>
+    </div>
+  </div>
+
+  <table class="train-table">
+    <thead>
+      <tr>
+        <th>Directions</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Destination Time</th>
+        <th>Flight Number</th>
+        <th>Tickets</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="filteredTrains.length === 0">
+        <td colspan="7" class="empty">No schedules found.</td>
+      </tr>
+      <tr *ngFor="let t of filteredTrains">
+        <td>{{ t.direction }}</td>
+        <td>{{ t.departure }}</td>
+        <td>{{ t.arrival }}</td>
+        <td>{{ t.travelTime }}</td>
+        <td># {{ t.tripNumber }}</td>
+        <td>{{ t.tickets }}</td>
+        <td class="actions">
+          <button (click)="goToEdit(t.id!)" class="btn btn-edit">Edit</button>
+          <button (click)="delete(t.id!)"   class="btn btn-del">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
