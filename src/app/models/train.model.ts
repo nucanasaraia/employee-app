@@ -6,4 +6,5 @@ export interface Train {
   travelTime: string;
   tripNumber: string;
   tickets: number;
+  isConfirmed?: boolean; 
 }

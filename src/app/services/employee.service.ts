@@ -24,4 +24,8 @@ export class EmployeeService extends BaseService<Employee> {
   getLogsByEmployee(id: number): Observable<EmployeeLog[]> {
     return this.http.get<EmployeeLog[]>(`${environment.apiUrl}/log/employee/${id}`);
   }
+
+  confirm(id: number): Observable<any> {
+  return this.http.patch(`${this.apiUrl}/${id}/confirm`, {});
+}
 }

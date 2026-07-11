@@ -79,6 +79,18 @@ constructor(
   });
 }
 
+async confirm(id: number){
+  const confirmed = await this.confirmService.confirm('Are you sure you want to confirm this employee? This cannot be undone.');
+  if (!confirmed) return;
+
+  this.svc.confirm(id).subscribe({
+    next: () => {
+      this.alert.info('Employee confirmed. Row is now locked.');
+      this.load();
+    },
+    error: () => this.alert.error('Failed to confirmation.')
+  })
+}
 
 //excel
 exportEmployees() {

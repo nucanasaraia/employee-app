@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Train } from '../models/train.model';
 import { BaseService } from './base.service';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RailwayService extends BaseService<Train> {
@@ -11,4 +12,7 @@ export class RailwayService extends BaseService<Train> {
     super(http, `${environment.apiUrl}/trains`);  
   }
 
+   confirm(id: number): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${id}/confirm`, {});
+  }
 }

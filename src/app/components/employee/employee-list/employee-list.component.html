@@ -41,9 +41,16 @@
           </span>
         </td>
         <td class="actions">
-          <button (click)="goToDetail(e.id!)" class="btn btn-view">View</button>
-          <button (click)="goToEdit(e.id!)" class="btn btn-edit">Edit</button>
-          <button (click)="delete(e.id!)" class="btn btn-del">Deactivate</button>
+          <ng-container *ngIf="!e.isConfirmed">
+            <button (click)="goToDetail(e.id!)" class="btn btn-view">View</button>
+            <button (click)="goToEdit(e.id!)" class="btn btn-edit">Edit</button>
+            <button (click)="delete(e.id!)" class="btn btn-del">Deactivate</button>
+            <button (click)="confirm(e.id!)" class="btn btn-confirm">Confirm</button>
+          </ng-container>
+
+          <span *ngIf="e.isConfirmed" class="confirmed-badge">
+            🔒 Confirmed
+          </span>
         </td>
       </tr>
     </tbody>

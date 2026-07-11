@@ -41,8 +41,15 @@
         <td># {{ t.tripNumber }}</td>
         <td>{{ t.tickets }}</td>
         <td class="actions">
-          <button (click)="goToEdit(t.id!)" class="btn btn-edit">Edit</button>
-          <button (click)="delete(t.id!)" class="btn btn-del">Delete</button>
+          <ng-container *ngIf="!t.isConfirmed">
+            <button (click)="goToEdit(t.id!)" class="btn btn-edit">Edit</button>
+            <button (click)="delete(t.id!)" class="btn btn-del">Delete</button>
+            <button (click)="confirm(t.id!)" class="btn btn-confirm">Confirm</button>
+          </ng-container>
+
+          <span *ngIf="t.isConfirmed" class="confirmed-badge">
+            🔒 Confirmed
+          </span>
         </td>
       </tr>
     </tbody>

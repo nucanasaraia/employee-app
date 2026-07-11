@@ -66,7 +66,20 @@ export class RailwayListComponent implements OnInit {
   });
 }
 
+async confirm(id: number){
+  const confirmed = await this.confirmService.confirm('Confirm this train schedule? This cannot be undone.');
+  if (!confirmed) return;
 
+  this.svc.confirm(id).subscribe({
+    next: () => {
+      this.alert.info('Train schedule confirmed and locked.');
+      this.load();
+    },
+    error: () => this.alert.error('Failed to confirmation.')
+  })
+}
+
+//excel
 exportTrains() {
   const data = this.filteredTrains.map(t => ({
     'ID':               t.id,
