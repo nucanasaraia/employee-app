@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,13 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';   
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -32,7 +39,15 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule//Enables [(ngModel)] two-way binding
+    FormsModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,123 @@
+{
+  "HEADER": {
+    "EMPLOYEE_MANAGEMENT": "თანამშრომლების მართვა",
+    "RAILWAY_SCHEDULE": "მატარებლის განრიგი"
+  },
+  "EMPLOYEE": {
+    "TITLE": "თანამშრომლების მართვა",
+    "ADD_BUTTON": "+ დამატება",
+    "SEARCH_PLACEHOLDER": "ძებნა სახელის, ელ-ფოსტის ან პოზიციის მიხედვით...",
+    "CLEAR": "გასუფთავება",
+    "EXPORT": "ექსპორტი",
+    "SHOW_HISTORY": "ყველას ჩვენება (არა აქტიურების ჩათვლით)",
+    "HIDE_HISTORY": "ისტორიის დამალვა",
+    "SHOW_LOGS": "ლოგირება",
+    "HIDE_LOGS": "დამალვა",
+    "TABLE": {
+      "NAME": "სახელი",
+      "EMAIL": "ელ-ფოსტა",
+      "POSITION": "პოზიცია",
+      "SALARY": "ხელფასი",
+      "STATUS": "სტატუსი",
+      "ACTIONS": "მოქმედებები"
+    },
+    "STATUS": {
+      "ACTIVE": "აქტიური",
+      "INACTIVE": "არააქტიური",
+      "DEACTIVATED": "გათიშული",
+      "CONFIRMED": "დადასტურებული"
+    },
+    "BUTTONS": {
+      "VIEW": "ნახვა",
+      "EDIT": "რედაქტირება",
+      "DEACTIVATE": "გათიშვა",
+      "CONFIRM": "დადასტურება",
+      "LOGS": "ლოგირება",
+      "HIDE_LOGS": "დამალვა"
+    },
+    "FORM": {
+      "ADD_TITLE": "თანამშრომლის დამატება",
+      "EDIT_TITLE": "თანამშრომლის რედაქტირება",
+      "NAME": "სრული სახელი",
+      "EMAIL": "ელ-ფოსტა",
+      "POSITION": "პოზიცია",
+      "SALARY": "ხელფასი",
+      "SAVE": "დამატება",
+      "UPDATE": "განახლება",
+      "CANCEL": "გაუქმება"
+    },
+    "VALIDATION": {
+      "NAME_REQUIRED": "სახელი სავალდებულოა.",
+      "EMAIL_REQUIRED": "ელ-ფოსტა სავალდებულოა.",
+      "EMAIL_INVALID": "შეიყვანეთ სწორი ელ-ფოსტა (მაგ. john@example.com).",
+      "POSITION_REQUIRED": "პოზიცია სავალდებულოა.",
+      "SALARY_INVALID": "ხელფასი უნდა იყოს 0-ზე მეტი."
+    },
+    "HISTORY_TITLE": "თანამშრომლების სრული ისტორია",
+    "LOGS_TITLE": "ლოგირება",
+    "NO_EMPLOYEES": "თანამშრომლები ვერ მოიძებნა.",
+    "NO_RECORDS": "ჩანაწერები არ არის.",
+    "NO_LOGS": "ლოგირება ვერ მოიძებნა.",
+    "LOADING": "იტვირთება..."
+  },
+  "RAILWAY": {
+    "TITLE": "მატარებლის განრიგი",
+    "ADD_BUTTON": "+ განრიგის დამატება",
+    "EXPORT": "ექსპორტი",
+    "ALL_DIRECTIONS": "ყველა მიმართულება",
+    "TBILISI_REGIONS": "თბილისი → რეგიონები",
+    "REGIONS_TBILISI": "რეგიონები → თბილისი",
+    "TABLE": {
+      "DIRECTIONS": "მიმართულება",
+      "DEPARTURE": "გამგზავრება",
+      "ARRIVAL": "ჩამოსვლა",
+      "DESTINATION_TIME": "მგზავრობის დრო",
+      "FLIGHT_NUMBER": "რეისის ნომერი",
+      "TICKETS": "ბილეთები",
+      "ACTIONS": "მოქმედებები"
+    },
+    "BUTTONS": {
+      "EDIT": "რედაქტირება",
+      "DELETE": "წაშლა",
+      "CONFIRM": "დადასტურება"
+    },
+    "FORM": {
+      "ADD_TITLE": "განრიგის დამატება",
+      "EDIT_TITLE": "განრიგის რედაქტირება",
+      "DIRECTION": "მიმართულება",
+      "SELECT_DIRECTION": "აირჩიეთ მიმართულება",
+      "DEPARTURE": "გამგზავრება",
+      "ARRIVAL": "ჩამოსვლა",
+      "DESTINATION_TIME": "მგზავრობის დრო",
+      "FLIGHT_NUMBER": "რეისის ნომერი",
+      "TICKETS": "ბილეთები",
+      "SAVE": "დამატება",
+      "UPDATE": "განახლება",
+      "CANCEL": "გაუქმება"
+    },
+    "VALIDATION": {
+      "DIRECTION_REQUIRED": "მიმართულება სავალდებულოა.",
+      "DEPARTURE_REQUIRED": "გამგზავრების დრო სავალდებულოა.",
+      "ARRIVAL_REQUIRED": "ჩამოსვლის დრო სავალდებულოა.",
+      "DESTINATION_REQUIRED": "მგზავრობის დრო სავალდებულოა.",
+      "FLIGHT_REQUIRED": "რეისის ნომერი სავალდებულოა.",
+      "TICKETS_INVALID": "ბილეთების რაოდენობა უნდა იყოს 0-ზე მეტი."
+    },
+    "NO_SCHEDULES": "განრიგი ვერ მოიძებნა.",
+    "CONFIRMED": "დადასტურებული"
+  },
+  "LOGS": {
+    "DATE_TIME": "თარიღი და დრო",
+    "ACTION": "მოქმედება",
+    "EMPLOYEE": "თანამშრომელი",
+    "DESCRIPTION": "აღწერა"
+  },
+  "FOOTER": {
+    "TAGLINE": "უსაფრთხო, სანდო და კომფორტული სამგზავრო მომსახურება საქართველოში.",
+    "RIGHTS": "ყველა უფლება დაცულია",
+    "TERMS": "წესები და პირობები",
+    "TBILISI_TO_REGIONS": "თბილისიდან რეგიონებში",
+    "REGIONS_TO_TBILISI": "რეგიონებიდან თბილისში",
+    "NEED_HELP": "გჭირდებათ დახმარება?"
+  }
+}

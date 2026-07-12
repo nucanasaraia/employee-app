@@ -1,0 +1,119 @@
+{
+  "HEADER": {
+    "EMPLOYEE_MANAGEMENT": "Employee Management",
+    "RAILWAY_SCHEDULE": "Railway Schedule"
+  },
+  "EMPLOYEE": {
+    "TITLE": "Employee Management",
+    "ADD_BUTTON": "+ Add Employee",
+    "SEARCH_PLACEHOLDER": "Search by name, email or position...",
+    "CLEAR": "Clear",
+    "EXPORT": "Export",
+    "SHOW_HISTORY": "Show All (Including Deactivated)",
+    "HIDE_HISTORY": "Hide History",
+    "SHOW_LOGS": "Show Activity Logs",
+    "HIDE_LOGS": "Hide Logs",
+    "TABLE": {
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "POSITION": "Position",
+      "SALARY": "Salary",
+      "STATUS": "Status",
+      "ACTIONS": "Actions"
+    },
+    "STATUS": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive",
+      "DEACTIVATED": "Deactivated",
+      "CONFIRMED": "Confirmed"
+    },
+    "BUTTONS": {
+      "VIEW": "View",
+      "EDIT": "Edit",
+      "DEACTIVATE": "Deactivate",
+      "CONFIRM": "Confirm",
+      "LOGS": "Logs",
+      "HIDE_LOGS": "Hide Logs"
+    },
+    "FORM": {
+      "ADD_TITLE": "Add Employee",
+      "EDIT_TITLE": "Edit Employee",
+      "NAME": "Full Name",
+      "EMAIL": "Email",
+      "POSITION": "Position",
+      "SALARY": "Salary",
+      "SAVE": "Add Employee",
+      "UPDATE": "Update",
+      "CANCEL": "Cancel"
+    },
+    "VALIDATION": {
+      "NAME_REQUIRED": "Name is required.",
+      "EMAIL_REQUIRED": "Email is required.",
+      "EMAIL_INVALID": "Enter a valid email (e.g. john@example.com).",
+      "POSITION_REQUIRED": "Position is required.",
+      "SALARY_INVALID": "Salary must be greater than 0."
+    },
+    "HISTORY_TITLE": "Full Employee History",
+    "LOGS_TITLE": "Activity Logs",
+    "NO_EMPLOYEES": "No employees found.",
+    "NO_RECORDS": "No records.",
+    "NO_LOGS": "No logs found.",
+    "LOADING": "Loading..."
+  },
+  "RAILWAY": {
+    "TITLE": "Train Schedule",
+    "ADD_BUTTON": "+ Add Schedule",
+    "EXPORT": "Export",
+    "ALL_DIRECTIONS": "All Directions",
+    "TBILISI_REGIONS": "Tbilisi → Regions",
+    "REGIONS_TBILISI": "Regions → Tbilisi",
+    "TABLE": {
+      "DIRECTIONS": "Directions",
+      "DEPARTURE": "Departure",
+      "ARRIVAL": "Arrival",
+      "DESTINATION_TIME": "Destination Time",
+      "FLIGHT_NUMBER": "Flight Number",
+      "TICKETS": "Tickets",
+      "ACTIONS": "Actions"
+    },
+    "BUTTONS": {
+      "EDIT": "Edit",
+      "DELETE": "Delete",
+      "CONFIRM": "Confirm"
+    },
+    "FORM": {
+      "ADD_TITLE": "Add Train Schedule",
+      "EDIT_TITLE": "Edit Train Schedule",
+      "DIRECTION": "Directions",
+      "SELECT_DIRECTION": "Select direction",
+      "DEPARTURE": "Departure",
+      "ARRIVAL": "Arrival",
+      "DESTINATION_TIME": "Destination Time",
+      "FLIGHT_NUMBER": "Flight Number",
+      "TICKETS": "Tickets",
+      "SAVE": "Add Schedule",
+      "UPDATE": "Update",
+      "CANCEL": "Cancel"
+    },
+    "VALIDATION": {
+      "DIRECTION_REQUIRED": "Direction is required.",
+      "DEPARTURE_REQUIRED": "Departure time is required.",
+      "ARRIVAL_REQUIRED": "Arrival time is required.",
+      "DESTINATION_REQUIRED": "Destination time is required.",
+      "FLIGHT_REQUIRED": "Flight number is required.",
+      "TICKETS_INVALID": "Tickets must be greater than 0."
+    },
+    "NO_SCHEDULES": "No schedules found.",
+    "CONFIRMED": "Confirmed"
+  },
+  "LOGS": {
+    "DATE_TIME": "Date & Time",
+    "ACTION": "Action",
+    "EMPLOYEE": "Employee",
+    "DESCRIPTION": "Description"
+  },
+  "FOOTER": {
+    "RIGHTS": "All Rights Reserved",
+    "TERMS": "Terms and Conditions"
+  }
+}

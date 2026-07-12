@@ -1,24 +1,45 @@
 <div class="detail-page">
-  <h2>Employee Detail</h2>
+  <h2>{{ 'EMPLOYEE.TITLE' | translate }}</h2>
 
   <div *ngIf="employee" class="detail-card">
-    <div class="detail-row"><span class="label">ID</span><span>{{ employee.id }}</span></div>
-    <div class="detail-row"><span class="label">Name</span><span>{{ employee.name }}</span></div>
-    <div class="detail-row"><span class="label">Email</span><span>{{ employee.email }}</span></div>
-    <div class="detail-row"><span class="label">Position</span><span>{{ employee.position }}</span></div>
-    <div class="detail-row"><span class="label">Salary</span><span>${{ employee.salary }}</span></div>
     <div class="detail-row">
-      <span class="label">Status</span>
+      <span class="label">ID</span>
+      <span>{{ employee.id }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="label">{{ 'EMPLOYEE.TABLE.NAME' | translate }}</span>
+      <span>{{ employee.name }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="label">{{ 'EMPLOYEE.TABLE.EMAIL' | translate }}</span>
+      <span>{{ employee.email }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="label">{{ 'EMPLOYEE.TABLE.POSITION' | translate }}</span>
+      <span>{{ employee.position }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="label">{{ 'EMPLOYEE.TABLE.SALARY' | translate }}</span>
+      <span>${{ employee.salary }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="label">{{ 'EMPLOYEE.TABLE.STATUS' | translate }}</span>
       <span class="badge" [class.badge-active]="employee.isActive" [class.badge-inactive]="!employee.isActive">
-        {{ employee.isActive ? 'Active' : 'Deactivated' }}
+        {{ employee.isActive ? ('EMPLOYEE.STATUS.ACTIVE' | translate) : ('EMPLOYEE.STATUS.DEACTIVATED' | translate) }}
       </span>
     </div>
 
     <div class="detail-actions">
-      <button (click)="goToEdit(employee.id!)" class="btn btn-edit">Edit</button>
-      <button (click)="goBack()" class="btn btn-back">Back to List</button>
+      <button (click)="goToEdit(employee.id!)" class="btn btn-edit">
+        {{ 'EMPLOYEE.BUTTONS.EDIT' | translate }}
+      </button>
+      <button (click)="goBack()" class="btn btn-back">
+        {{ 'EMPLOYEE.BUTTONS.VIEW' | translate }}
+      </button>
     </div>
   </div>
 
-  <div *ngIf="!employee" class="loading">Loading...</div>
+  <div *ngIf="!employee" class="loading">
+    {{ 'EMPLOYEE.LOADING' | translate }}
+  </div>
 </div>

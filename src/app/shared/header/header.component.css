@@ -30,6 +30,11 @@
   width: auto;
 }
 
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
 .nav-select {
   padding: 8px 16px;
   border: 1px solid #ddd;
@@ -44,3 +49,29 @@
 .nav-select:focus {
   border-color: #aaa;
 }
+
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 16px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #555;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+.lang-btn:hover { color: #222; }
+
+.lang-active {
+  font-weight: 700;
+  color: #222;
+}
+
+.lang-divider { color: #ccc; }

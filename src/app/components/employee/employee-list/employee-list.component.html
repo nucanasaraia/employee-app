@@ -1,34 +1,37 @@
 <div class="page">
   <div class="page-header">
-    <h2>Employee Management</h2>
+    <h2>{{ 'EMPLOYEE.TITLE' | translate }}</h2>
     <div class="controls">
-      <input [(ngModel)]="searchTerm" (input)="search()" placeholder="Search by name, email or position..."
-        class="search-input" />
-      <button (click)="clearSearch()" class="btn btn-clear">Clear</button>
-
+      <input [(ngModel)]="searchTerm" (input)="search()"
+             [placeholder]="'EMPLOYEE.SEARCH_PLACEHOLDER' | translate"
+             class="search-input" />
+      <button (click)="clearSearch()" class="btn btn-clear">
+        {{ 'EMPLOYEE.CLEAR' | translate }}
+      </button>
       <button (click)="exportEmployees()" class="btn btn-excel" title="Export to Excel">
         <img src="assets/images/excel-icon.png" alt="Excel" style="height:16px; width:16px; margin-right:6px;" />
-        Export
+        {{ 'EMPLOYEE.EXPORT' | translate }}
       </button>
-
-      <button (click)="goToAdd()" class="btn btn-add">+ Add Employee</button>
+      <button (click)="goToAdd()" class="btn btn-add">
+        {{ 'EMPLOYEE.ADD_BUTTON' | translate }}
+      </button>
     </div>
   </div>
 
   <table class="data-table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Position</th>
-        <th>Salary</th>
-        <th>Status</th>
-        <th>Actions</th>
+        <th>{{ 'EMPLOYEE.TABLE.NAME' | translate }}</th>
+        <th>{{ 'EMPLOYEE.TABLE.EMAIL' | translate }}</th>
+        <th>{{ 'EMPLOYEE.TABLE.POSITION' | translate }}</th>
+        <th>{{ 'EMPLOYEE.TABLE.SALARY' | translate }}</th>
+        <th>{{ 'EMPLOYEE.TABLE.STATUS' | translate }}</th>
+        <th>{{ 'EMPLOYEE.TABLE.ACTIONS' | translate }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngIf="filteredEmployees.length === 0">
-        <td colspan="6" class="empty">No employees found.</td>
+        <td colspan="6" class="empty">{{ 'EMPLOYEE.NO_EMPLOYEES' | translate }}</td>
       </tr>
       <tr *ngFor="let e of filteredEmployees">
         <td>{{ e.name }}</td>
@@ -37,19 +40,26 @@
         <td>${{ e.salary }}</td>
         <td>
           <span class="badge" [class.badge-active]="e.isActive" [class.badge-inactive]="!e.isActive">
-            {{ e.isActive ? 'Active' : 'Inactive' }}
+            {{ e.isActive ? ('EMPLOYEE.STATUS.ACTIVE' | translate) : ('EMPLOYEE.STATUS.INACTIVE' | translate) }}
           </span>
         </td>
         <td class="actions">
           <ng-container *ngIf="!e.isConfirmed">
-            <button (click)="goToDetail(e.id!)" class="btn btn-view">View</button>
-            <button (click)="goToEdit(e.id!)" class="btn btn-edit">Edit</button>
-            <button (click)="delete(e.id!)" class="btn btn-del">Deactivate</button>
-            <button (click)="confirm(e.id!)" class="btn btn-confirm">Confirm</button>
+            <button (click)="goToDetail(e.id!)" class="btn btn-view">
+              {{ 'EMPLOYEE.BUTTONS.VIEW' | translate }}
+            </button>
+            <button (click)="goToEdit(e.id!)" class="btn btn-edit">
+              {{ 'EMPLOYEE.BUTTONS.EDIT' | translate }}
+            </button>
+            <button (click)="delete(e.id!)" class="btn btn-del">
+              {{ 'EMPLOYEE.BUTTONS.DEACTIVATE' | translate }}
+            </button>
+            <button (click)="confirm(e.id!)" class="btn btn-confirm">
+              {{ 'EMPLOYEE.BUTTONS.CONFIRM' | translate }}
+            </button>
           </ng-container>
-
           <span *ngIf="e.isConfirmed" class="confirmed-badge">
-            🔒 Confirmed
+            🔒 {{ 'EMPLOYEE.STATUS.CONFIRMED' | translate }}
           </span>
         </td>
       </tr>
@@ -59,24 +69,24 @@
   <!-- Activity Logs -->
   <div class="section-toggle">
     <button (click)="toggleLogs()" class="btn btn-toggle">
-      {{ showLogs ? 'Hide Logs' : 'Show Activity Logs' }}
+      {{ showLogs ? ('EMPLOYEE.HIDE_LOGS' | translate) : ('EMPLOYEE.SHOW_LOGS' | translate) }}
     </button>
   </div>
 
   <div *ngIf="showLogs" class="section">
-    <h3>Activity Logs</h3>
+    <h3>{{ 'EMPLOYEE.LOGS_TITLE' | translate }}</h3>
     <table class="data-table">
       <thead>
         <tr>
-          <th>Date & Time</th>
-          <th>Action</th>
-          <th>Employee</th>
-          <th>Description</th>
+          <th>{{ 'LOGS.DATE_TIME' | translate }}</th>
+          <th>{{ 'LOGS.ACTION' | translate }}</th>
+          <th>{{ 'LOGS.EMPLOYEE' | translate }}</th>
+          <th>{{ 'LOGS.DESCRIPTION' | translate }}</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngIf="logs.length === 0">
-          <td colspan="4" class="empty">No logs found.</td>
+          <td colspan="4" class="empty">{{ 'EMPLOYEE.NO_LOGS' | translate }}</td>
         </tr>
         <tr *ngFor="let log of logs">
           <td class="nowrap">{{ log.performedAt | date:'dd/MM/yyyy HH:mm:ss' }}</td>
@@ -95,30 +105,30 @@
   <!-- History -->
   <div class="section-toggle" style="display:flex; gap:10px; align-items:center;">
     <button (click)="toggleHistory()" class="btn btn-toggle">
-      {{ showHistory ? 'Hide History' : 'Show All (Including Deactivated)' }}
+      {{ showHistory ? ('EMPLOYEE.HIDE_HISTORY' | translate) : ('EMPLOYEE.SHOW_HISTORY' | translate) }}
     </button>
     <button (click)="exportHistory()" *ngIf="showHistory" class="btn btn-excel">
       <img src="assets/images/excel-icon.png" alt="Excel" style="height:16px; width:16px; margin-right:6px;" />
-      Export History
+      {{ 'EMPLOYEE.EXPORT' | translate }}
     </button>
   </div>
 
   <div *ngIf="showHistory" class="section">
-    <h3>Full Employee History</h3>
+    <h3>{{ 'EMPLOYEE.HISTORY_TITLE' | translate }}</h3>
     <table class="data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Position</th>
-          <th>Salary</th>
-          <th>Status</th>
+          <th>{{ 'EMPLOYEE.TABLE.NAME' | translate }}</th>
+          <th>{{ 'EMPLOYEE.TABLE.EMAIL' | translate }}</th>
+          <th>{{ 'EMPLOYEE.TABLE.POSITION' | translate }}</th>
+          <th>{{ 'EMPLOYEE.TABLE.SALARY' | translate }}</th>
+          <th>{{ 'EMPLOYEE.TABLE.STATUS' | translate }}</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngIf="historyEmployees.length === 0">
-          <td colspan="6" class="empty">No records.</td>
+          <td colspan="6" class="empty">{{ 'EMPLOYEE.NO_RECORDS' | translate }}</td>
         </tr>
         <tr *ngFor="let e of historyEmployees">
           <td>{{ e.id }}</td>
@@ -128,7 +138,7 @@
           <td>${{ e.salary }}</td>
           <td>
             <span class="badge" [class.badge-active]="e.isActive" [class.badge-inactive]="!e.isActive">
-              {{ e.isActive ? 'Active' : 'Deactivated' }}
+              {{ e.isActive ? ('EMPLOYEE.STATUS.ACTIVE' | translate) : ('EMPLOYEE.STATUS.DEACTIVATED' | translate) }}
             </span>
           </td>
         </tr>

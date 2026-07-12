@@ -18,10 +18,10 @@ export class RailwayListComponent implements OnInit {
   selectedDirection: string = 'all';
 
   directions = [
-    { value: 'all',              label: 'All Directions'     },
-    { value: 'Tbilisi-Regions',  label: 'Tbilisi → Regions'  },
-    { value: 'Regions-Tbilisi',  label: 'Regions → Tbilisi'  },
-  ];
+  { value: 'all',             label: 'RAILWAY.ALL_DIRECTIONS' },
+  { value: 'Tbilisi-Regions', label: 'RAILWAY.TBILISI_REGIONS' },
+  { value: 'Regions-Tbilisi', label: 'RAILWAY.REGIONS_TBILISI' },
+];
 
   constructor(
     private svc: RailwayService, 

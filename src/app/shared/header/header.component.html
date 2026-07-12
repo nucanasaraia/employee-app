@@ -1,14 +1,29 @@
 <header class="header">
   <div class="header-inner">
+
     <div class="logo" (click)="goHome()">
       <img src="assets/images/logoo.png" alt="Georgian Travel Platform" class="logo-img" />
     </div>
 
     <nav class="nav">
       <select (change)="onPageChange($event)" [(ngModel)]="selectedPage" class="nav-select">
-        <option value="employees">Employee Management</option>
-        <option value="railway">Railway Schedule</option>
+        <option value="employees">{{ 'HEADER.EMPLOYEE_MANAGEMENT' | translate }}</option>
+        <option value="railway">{{ 'HEADER.RAILWAY_SCHEDULE' | translate }}</option>
       </select>
+
+      <div class="lang-switcher">
+        <button (click)="switchLanguage('en')"
+                [class.lang-active]="currentLang === 'en'"
+                class="lang-btn">
+          EN
+        </button>
+        <span class="lang-divider">|</span>
+        <button (click)="switchLanguage('ka')"
+                [class.lang-active]="currentLang === 'ka'"
+                class="lang-btn">
+          ქა
+        </button>
+      </div>
     </nav>
   </div>
 </header>

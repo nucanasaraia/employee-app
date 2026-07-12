@@ -1,63 +1,85 @@
 <div class="form-page">
-  <h2>{{ editingId ? 'Edit' : 'Add' }} Train Schedule</h2>
+  <h2>{{ (editingId ? 'RAILWAY.FORM.EDIT_TITLE' : 'RAILWAY.FORM.ADD_TITLE') | translate }}</h2>
 
   <div class="form-card">
 
     <!-- Direction -->
     <div class="field">
-      <label>Directions</label>
+      <label>{{ 'RAILWAY.FORM.DIRECTION' | translate }}</label>
       <select [(ngModel)]="form.direction"
               [style.border]="errors.direction ? '1px solid red' : '1px solid #ddd'"
               class="input">
-        <option value="">Select direction</option>
+        <option value="">{{ 'RAILWAY.FORM.SELECT_DIRECTION' | translate }}</option>
         <option *ngFor="let d of directions" [value]="d.value">{{ d.label }}</option>
       </select>
-      <small *ngIf="errors.direction" class="error">{{ errors.direction }}</small>
+      <small *ngIf="errors.direction" class="error">
+        {{ 'RAILWAY.VALIDATION.DIRECTION_REQUIRED' | translate }}
+      </small>
     </div>
 
     <!-- Departure -->
     <div class="field">
-      <label>Departure</label>
+      <label>{{ 'RAILWAY.FORM.DEPARTURE' | translate }}</label>
       <input [(ngModel)]="form.departure" type="time" class="input"
              [style.border]="errors.departure ? '1px solid red' : '1px solid #ddd'" />
-      <small *ngIf="errors.departure" class="error">{{ errors.departure }}</small>
+      <small *ngIf="errors.departure" class="error">
+        {{ 'RAILWAY.VALIDATION.DEPARTURE_REQUIRED' | translate }}
+      </small>
     </div>
 
     <!-- Arrival -->
     <div class="field">
-      <label>Arrival</label>
+      <label>{{ 'RAILWAY.FORM.ARRIVAL' | translate }}</label>
       <input [(ngModel)]="form.arrival" type="time" class="input"
              [style.border]="errors.arrival ? '1px solid red' : '1px solid #ddd'" />
-      <small *ngIf="errors.arrival" class="error">{{ errors.arrival }}</small>
+      <small *ngIf="errors.arrival" class="error">
+        {{ 'RAILWAY.VALIDATION.ARRIVAL_REQUIRED' | translate }}
+      </small>
     </div>
 
     <!-- Destination Time -->
     <div class="field">
-      <label>Destination Time</label>
-      <input [(ngModel)]="form.travelTime" placeholder="e.g. 5 hours 12 minutes" class="input"
+      <label>{{ 'RAILWAY.FORM.DESTINATION_TIME' | translate }}</label>
+      <input [(ngModel)]="form.travelTime"
+             [placeholder]="'RAILWAY.FORM.DESTINATION_TIME' | translate"
+             class="input"
              [style.border]="errors.travelTime ? '1px solid red' : '1px solid #ddd'" />
-      <small *ngIf="errors.travelTime" class="error">{{ errors.travelTime }}</small>
+      <small *ngIf="errors.travelTime" class="error">
+        {{ 'RAILWAY.VALIDATION.DESTINATION_REQUIRED' | translate }}
+      </small>
     </div>
 
     <!-- Flight Number -->
     <div class="field">
-      <label>Train Number</label>
-      <input [(ngModel)]="form.tripNumber" placeholder="e.g. 870" class="input"
+      <label>{{ 'RAILWAY.FORM.FLIGHT_NUMBER' | translate }}</label>
+      <input [(ngModel)]="form.tripNumber"
+             [placeholder]="'RAILWAY.FORM.FLIGHT_NUMBER' | translate"
+             class="input"
              [style.border]="errors.tripNumber ? '1px solid red' : '1px solid #ddd'" />
-      <small *ngIf="errors.tripNumber" class="error">{{ errors.tripNumber }}</small>
+      <small *ngIf="errors.tripNumber" class="error">
+        {{ 'RAILWAY.VALIDATION.FLIGHT_REQUIRED' | translate }}
+      </small>
     </div>
 
     <!-- Tickets -->
     <div class="field">
-      <label>Tickets</label>
-      <input [(ngModel)]="form.tickets" type="number" placeholder="Number of tickets" class="input"
+      <label>{{ 'RAILWAY.FORM.TICKETS' | translate }}</label>
+      <input [(ngModel)]="form.tickets" type="number"
+             [placeholder]="'RAILWAY.FORM.TICKETS' | translate"
+             class="input"
              [style.border]="errors.tickets ? '1px solid red' : '1px solid #ddd'" />
-      <small *ngIf="errors.tickets" class="error">{{ errors.tickets }}</small>
+      <small *ngIf="errors.tickets" class="error">
+        {{ 'RAILWAY.VALIDATION.TICKETS_INVALID' | translate }}
+      </small>
     </div>
 
     <div class="form-actions">
-      <button (click)="save()"   class="btn btn-save">{{ editingId ? 'Update' : 'Add Schedule' }}</button>
-      <button (click)="cancel()" class="btn btn-cancel">Cancel</button>
+      <button (click)="save()" class="btn btn-save">
+        {{ (editingId ? 'RAILWAY.FORM.UPDATE' : 'RAILWAY.FORM.SAVE') | translate }}
+      </button>
+      <button (click)="cancel()" class="btn btn-cancel">
+        {{ 'RAILWAY.FORM.CANCEL' | translate }}
+      </button>
     </div>
 
   </div>

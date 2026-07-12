@@ -1,37 +1,41 @@
 <div class="page">
   <div class="page-header">
-    <h2>Train Schedule</h2>
+    <h2>{{ 'RAILWAY.TITLE' | translate }}</h2>
     <div class="controls">
-      <select [(ngModel)]="selectedDirection" (change)="filterByDirection()" class="direction-select">
+      <select [(ngModel)]="selectedDirection"
+              (change)="filterByDirection()"
+              class="direction-select">
         <option *ngFor="let d of directions" [value]="d.value">
-          {{ d.label }}
+          {{ d.label | translate }}
         </option>
       </select>
 
       <button (click)="exportTrains()" class="btn btn-excel" title="Export to Excel">
         <img src="assets/images/excel-icon.png" alt="Excel" style="height:16px; width:16px; margin-right:6px;" />
-        Export
+        {{ 'RAILWAY.EXPORT' | translate }}
       </button>
 
-      <button (click)="goToAdd()" class="btn btn-add">+ Add Schedule</button>
+      <button (click)="goToAdd()" class="btn btn-add">
+        {{ 'RAILWAY.ADD_BUTTON' | translate }}
+      </button>
     </div>
   </div>
 
   <table class="train-table">
     <thead>
       <tr>
-        <th>Directions</th>
-        <th>Departure</th>
-        <th>Arrival</th>
-        <th>Destination Time</th>
-        <th>Flight Number</th>
-        <th>Tickets</th>
-        <th>Actions</th>
+        <th>{{ 'RAILWAY.TABLE.DIRECTIONS' | translate }}</th>
+        <th>{{ 'RAILWAY.TABLE.DEPARTURE' | translate }}</th>
+        <th>{{ 'RAILWAY.TABLE.ARRIVAL' | translate }}</th>
+        <th>{{ 'RAILWAY.TABLE.DESTINATION_TIME' | translate }}</th>
+        <th>{{ 'RAILWAY.TABLE.FLIGHT_NUMBER' | translate }}</th>
+        <th>{{ 'RAILWAY.TABLE.TICKETS' | translate }}</th>
+        <th>{{ 'RAILWAY.TABLE.ACTIONS' | translate }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngIf="filteredTrains.length === 0">
-        <td colspan="7" class="empty">No schedules found.</td>
+        <td colspan="7" class="empty">{{ 'RAILWAY.NO_SCHEDULES' | translate }}</td>
       </tr>
       <tr *ngFor="let t of filteredTrains">
         <td>{{ t.direction }}</td>
@@ -42,13 +46,18 @@
         <td>{{ t.tickets }}</td>
         <td class="actions">
           <ng-container *ngIf="!t.isConfirmed">
-            <button (click)="goToEdit(t.id!)" class="btn btn-edit">Edit</button>
-            <button (click)="delete(t.id!)" class="btn btn-del">Delete</button>
-            <button (click)="confirm(t.id!)" class="btn btn-confirm">Confirm</button>
+            <button (click)="goToEdit(t.id!)" class="btn btn-edit">
+              {{ 'RAILWAY.BUTTONS.EDIT' | translate }}
+            </button>
+            <button (click)="delete(t.id!)" class="btn btn-del">
+              {{ 'RAILWAY.BUTTONS.DELETE' | translate }}
+            </button>
+            <button (click)="confirm(t.id!)" class="btn btn-confirm">
+              {{ 'RAILWAY.BUTTONS.CONFIRM' | translate }}
+            </button>
           </ng-container>
-
           <span *ngIf="t.isConfirmed" class="confirmed-badge">
-            🔒 Confirmed
+            🔒 {{ 'RAILWAY.CONFIRMED' | translate }}
           </span>
         </td>
       </tr>

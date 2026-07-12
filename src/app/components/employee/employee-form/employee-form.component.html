@@ -1,51 +1,75 @@
 <div style="max-width:600px; margin:auto; font-family:sans-serif; padding:16px;">
-  <h2>{{ editingId ? 'Edit' : 'Add' }} Employee</h2>
+  <h2>{{ (editingId ? 'EMPLOYEE.FORM.EDIT_TITLE' : 'EMPLOYEE.FORM.ADD_TITLE') | translate }}</h2>
 
   <div style="background:#f4f4f4; padding:20px; border-radius:8px;">
 
     <!-- Name -->
     <div style="margin-bottom:12px;">
-      <label style="display:block; margin-bottom:4px; font-weight:bold;">Full Name</label>
-      <input [(ngModel)]="form.name" placeholder="Full Name"
+      <label style="display:block; margin-bottom:4px; font-weight:bold;">
+        {{ 'EMPLOYEE.FORM.NAME' | translate }}
+      </label>
+      <input [(ngModel)]="form.name"
+             [placeholder]="'EMPLOYEE.FORM.NAME' | translate"
              style="width:100%; padding:8px; box-sizing:border-box;"
              [style.border]="errors.name ? '1px solid red' : '1px solid #ccc'" />
-      <small *ngIf="errors.name" style="color:red;">{{ errors.name }}</small>
+      <small *ngIf="errors.name" style="color:red;">
+        {{ 'EMPLOYEE.VALIDATION.NAME_REQUIRED' | translate }}
+      </small>
     </div>
 
     <!-- Email -->
     <div style="margin-bottom:12px;">
-      <label style="display:block; margin-bottom:4px; font-weight:bold;">Email</label>
-      <input [(ngModel)]="form.email" placeholder="Email Address"
+      <label style="display:block; margin-bottom:4px; font-weight:bold;">
+        {{ 'EMPLOYEE.FORM.EMAIL' | translate }}
+      </label>
+      <input [(ngModel)]="form.email"
+             [placeholder]="'EMPLOYEE.FORM.EMAIL' | translate"
              style="width:100%; padding:8px; box-sizing:border-box;"
              [style.border]="errors.email ? '1px solid red' : '1px solid #ccc'" />
-      <small *ngIf="errors.email" style="color:red;">{{ errors.email }}</small>
+      <small *ngIf="errors.email" style="color:red;">
+        {{ errors.email === 'Email is required.'
+            ? ('EMPLOYEE.VALIDATION.EMAIL_REQUIRED' | translate)
+            : ('EMPLOYEE.VALIDATION.EMAIL_INVALID' | translate) }}
+      </small>
     </div>
 
     <!-- Position -->
     <div style="margin-bottom:12px;">
-      <label style="display:block; margin-bottom:4px; font-weight:bold;">Position</label>
-      <input [(ngModel)]="form.position" placeholder="Position"
+      <label style="display:block; margin-bottom:4px; font-weight:bold;">
+        {{ 'EMPLOYEE.FORM.POSITION' | translate }}
+      </label>
+      <input [(ngModel)]="form.position"
+             [placeholder]="'EMPLOYEE.FORM.POSITION' | translate"
              style="width:100%; padding:8px; box-sizing:border-box;"
              [style.border]="errors.position ? '1px solid red' : '1px solid #ccc'" />
-      <small *ngIf="errors.position" style="color:red;">{{ errors.position }}</small>
+      <small *ngIf="errors.position" style="color:red;">
+        {{ 'EMPLOYEE.VALIDATION.POSITION_REQUIRED' | translate }}
+      </small>
     </div>
 
     <!-- Salary -->
     <div style="margin-bottom:20px;">
-      <label style="display:block; margin-bottom:4px; font-weight:bold;">Salary</label>
-      <input [(ngModel)]="form.salary" placeholder="Salary" type="number"
+      <label style="display:block; margin-bottom:4px; font-weight:bold;">
+        {{ 'EMPLOYEE.FORM.SALARY' | translate }}
+      </label>
+      <input [(ngModel)]="form.salary"
+             [placeholder]="'EMPLOYEE.FORM.SALARY' | translate"
+             type="number"
              style="width:100%; padding:8px; box-sizing:border-box;"
              [style.border]="errors.salary ? '1px solid red' : '1px solid #ccc'" />
-      <small *ngIf="errors.salary" style="color:red;">{{ errors.salary }}</small>
+      <small *ngIf="errors.salary" style="color:red;">
+        {{ 'EMPLOYEE.VALIDATION.SALARY_INVALID' | translate }}
+      </small>
     </div>
 
     <button (click)="save()"
             style="padding:8px 24px; background:#333; color:#fff; border:none; border-radius:4px; cursor:pointer; margin-right:8px;">
-      {{ editingId ? 'Update' : 'Add Employee' }}
+      {{ (editingId ? 'EMPLOYEE.FORM.UPDATE' : 'EMPLOYEE.FORM.SAVE') | translate }}
     </button>
     <button (click)="cancel()"
             style="padding:8px 24px; background:#999; color:#fff; border:none; border-radius:4px; cursor:pointer;">
-      Cancel
+      {{ 'EMPLOYEE.FORM.CANCEL' | translate }}
     </button>
+
   </div>
 </div>
