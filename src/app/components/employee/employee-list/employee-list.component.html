@@ -30,10 +30,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngIf="filteredEmployees.length === 0">
+      <tr *ngIf="pagedEmployees.length === 0">
         <td colspan="6" class="empty">{{ 'EMPLOYEE.NO_EMPLOYEES' | translate }}</td>
       </tr>
-      <tr *ngFor="let e of filteredEmployees">
+      <tr *ngFor="let e of pagedEmployees">
         <td>{{ e.name }}</td>
         <td>{{ e.email }}</td>
         <td>{{ e.position }}</td>
@@ -65,6 +65,33 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- ── Pagination ─────────────────────────────────────── -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button (click)="goToPage(currentPage - 1)"
+            [disabled]="currentPage === 1"
+            class="page-btn">
+      ‹
+    </button>
+
+    <button *ngFor="let p of getPages()"
+            (click)="goToPage(p)"
+            class="page-btn"
+            [class.page-active]="p === currentPage">
+      {{ p }}
+    </button>
+
+    <button (click)="goToPage(currentPage + 1)"
+            [disabled]="currentPage === totalPages"
+            class="page-btn">
+      ›
+    </button>
+
+    <span class="page-info">
+      {{ currentPage }} / {{ totalPages }}
+      ({{ filteredEmployees.length }} total)
+    </span>
+  </div>
 
   <!-- Activity Logs -->
   <div class="section-toggle">

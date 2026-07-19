@@ -17,24 +17,31 @@ export class EmployeeListComponent implements OnInit {
   filteredEmployees: Employee[] = [];
   historyEmployees: Employee[] = [];
   searchTerm: string = '';
+
   showHistory: boolean = false;
   logs: EmployeeLog[] = [];
   showLogs: boolean = false;
 
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 1;
+  pagedEmployees: Employee[] = [];
 
-constructor(
-  private svc: EmployeeService,
-  private router: Router,
-  private alert: AlertService,
-  private confirmService: ConfirmService,
-  private excel: ExcelService   
-) {}
+
+  constructor(
+    private svc: EmployeeService,
+    private router: Router,
+    private alert: AlertService,
+    private confirmService: ConfirmService,
+    private excel: ExcelService
+  ) { }
   ngOnInit() { this.load(); }
 
   load() {
     this.svc.getAll().subscribe(data => {
       this.employees = data;
       this.filteredEmployees = data;
+      this.applyPagination();
     });
   }
 
@@ -42,15 +49,36 @@ constructor(
     const term = this.searchTerm.toLowerCase().trim();
     this.filteredEmployees = !term ? this.employees
       : this.employees.filter(e =>
-          e.name.toLowerCase().includes(term) ||
-          e.email.toLowerCase().includes(term) ||
-          e.position!.toLowerCase().includes(term)
-        );
+        e.name.toLowerCase().includes(term) ||
+        e.email.toLowerCase().includes(term) ||
+        e.position!.toLowerCase().includes(term)
+      );
+    this.currentPage = 1;
+    this.applyPagination();
   }
 
   clearSearch() {
     this.searchTerm = '';
     this.filteredEmployees = this.employees;
+    this.currentPage = 1;
+    this.applyPagination();
+  }
+
+  applyPagination() {
+    this.totalPages = Math.ceil(this.filteredEmployees.length / this.pageSize);
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedEmployees = this.filteredEmployees.slice(start, end);
+  }
+
+  goToPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.applyPagination();
+  }
+
+  getPages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
   toggleHistory() {
@@ -62,83 +90,83 @@ constructor(
     }
   }
 
-  goToAdd()            { this.router.navigate(['/employees/add']); }
+  goToAdd() { this.router.navigate(['/employees/add']); }
   goToEdit(id: number) { this.router.navigate(['/employees/edit', id]); }
-  goToDetail(id:number){ this.router.navigate(['/employees/detail', id]); }
+  goToDetail(id: number) { this.router.navigate(['/employees/detail', id]); }
 
- async delete(id: number) {
-  const confirmed = await this.confirmService.confirm('Delete this employee?');
-  if (!confirmed) return;
+  async delete(id: number) {
+    const confirmed = await this.confirmService.confirm('Delete this employee?');
+    if (!confirmed) return;
 
-  this.svc.delete(id).subscribe({
-    next: () => {
-      this.alert.success('Employee deleted.');
-      this.load();
-    },
-    error: () => this.alert.error('Failed to delete employee.')
-  });
-}
+    this.svc.delete(id).subscribe({
+      next: () => {
+        this.alert.success('Employee deleted.');
+        this.load();
+      },
+      error: () => this.alert.error('Failed to delete employee.')
+    });
+  }
 
-async confirm(id: number){
-  const confirmed = await this.confirmService.confirm('Are you sure you want to confirm this employee? This cannot be undone.');
-  if (!confirmed) return;
+  async confirm(id: number) {
+    const confirmed = await this.confirmService.confirm('Are you sure you want to confirm this employee? This cannot be undone.');
+    if (!confirmed) return;
 
-  this.svc.confirm(id).subscribe({
-    next: () => {
-      this.alert.info('Employee confirmed. Row is now locked.');
-      this.load();
-    },
-    error: () => this.alert.error('Failed to confirmation.')
-  })
-}
+    this.svc.confirm(id).subscribe({
+      next: () => {
+        this.alert.info('Employee confirmed. Row is now locked.');
+        this.load();
+      },
+      error: () => this.alert.error('Failed to confirmation.')
+    })
+  }
 
-//excel
-exportEmployees() {
-  const data = this.filteredEmployees.map(e => ({
-    'ID':       e.id,
-    'Name':     e.name,
-    'Email':    e.email,
-    'Position': e.position,
-    'Salary':   e.salary,
-    'Status':   e.isActive ? 'Active' : 'Inactive'
-  }));
+  //excel
+  exportEmployees() {
+    const data = this.filteredEmployees.map(e => ({
+      'ID': e.id,
+      'Name': e.name,
+      'Email': e.email,
+      'Position': e.position,
+      'Salary': e.salary,
+      'Status': e.isActive ? 'Active' : 'Inactive'
+    }));
 
-  this.excel.exportToExcel(data, 'Employees', 'Employees');
-  this.alert.success('Employees exported to Excel!');
-}
+    this.excel.exportToExcel(data, 'Employees', 'Employees');
+    this.alert.success('Employees exported to Excel!');
+  }
 
-exportHistory() {
-  const data = this.historyEmployees.map(e => ({
-    'ID':       e.id,
-    'Name':     e.name,
-    'Email':    e.email,
-    'Position': e.position,
-    'Salary':   e.salary,
-    'Status':   e.isActive ? 'Active' : 'Inactive'
-  }));
+  exportHistory() {
+    const data = this.historyEmployees.map(e => ({
+      'ID': e.id,
+      'Name': e.name,
+      'Email': e.email,
+      'Position': e.position,
+      'Salary': e.salary,
+      'Status': e.isActive ? 'Active' : 'Inactive'
+    }));
 
-  this.excel.exportToExcel(data, 'Employees_History', 'History');
-  this.alert.success('History exported to Excel!');
-}
+    this.excel.exportToExcel(data, 'Employees_History', 'History');
+    this.alert.success('History exported to Excel!');
+  }
 
 
 
   toggleLogs() {
-  this.showLogs = !this.showLogs;
-  if (this.showLogs) {
-    this.svc.getAllLogs().subscribe(data => {
-      this.logs = data;
-    });
+    this.showLogs = !this.showLogs;
+    if (this.showLogs) {
+      this.svc.getAllLogs().subscribe(data => {
+        this.logs = data;
+      });
+    }
   }
-}
 
-getActionColor(action: string): string {
-  switch(action) {
-    case 'ADD':        return '#4CAF50';   
-    case 'UPDATE':     return '#FF9800';   
-    case 'DEACTIVATE': return '#f44336';   
-    case 'VIEW':       return '#2196F3';   
-    default:           return '#999';
+  getActionColor(action: string): string {
+    switch (action) {
+      case 'ADD': return '#4CAF50';
+      case 'UPDATE': return '#FF9800';
+      case 'DEACTIVATE': return '#f44336';
+      case 'VIEW': return '#2196F3';
+      default: return '#999';
+    }
   }
-}
 }

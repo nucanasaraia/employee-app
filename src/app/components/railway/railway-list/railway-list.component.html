@@ -9,12 +9,10 @@
           {{ d.label | translate }}
         </option>
       </select>
-
       <button (click)="exportTrains()" class="btn btn-excel" title="Export to Excel">
         <img src="assets/images/excel-icon.png" alt="Excel" style="height:16px; width:16px; margin-right:6px;" />
         {{ 'RAILWAY.EXPORT' | translate }}
       </button>
-
       <button (click)="goToAdd()" class="btn btn-add">
         {{ 'RAILWAY.ADD_BUTTON' | translate }}
       </button>
@@ -34,10 +32,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngIf="filteredTrains.length === 0">
+      <tr *ngIf="pagedTrains.length === 0">
         <td colspan="7" class="empty">{{ 'RAILWAY.NO_SCHEDULES' | translate }}</td>
       </tr>
-      <tr *ngFor="let t of filteredTrains">
+      <tr *ngFor="let t of pagedTrains">
         <td>{{ t.direction }}</td>
         <td>{{ t.departure }}</td>
         <td>{{ t.arrival }}</td>
@@ -63,4 +61,31 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- ── Pagination ─────────────────────────────────────── -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button (click)="goToPage(currentPage - 1)"
+            [disabled]="currentPage === 1"
+            class="page-btn">
+      ‹
+    </button>
+
+    <button *ngFor="let p of getPages()"
+            (click)="goToPage(p)"
+            class="page-btn"
+            [class.page-active]="p === currentPage">
+      {{ p }}
+    </button>
+
+    <button (click)="goToPage(currentPage + 1)"
+            [disabled]="currentPage === totalPages"
+            class="page-btn">
+      ›
+    </button>
+
+    <span class="page-info">
+      {{ currentPage }} / {{ totalPages }}
+      ({{ filteredTrains.length }} total)
+    </span>
+  </div>
 </div>
