@@ -190,3 +190,12 @@
   font-size: 13px;
   color: #888;
 }
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable:hover {
+  background: #ececec;
+}

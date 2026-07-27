@@ -28,6 +28,9 @@ export class RailwayListComponent implements OnInit {
     { value: 'Regions-Tbilisi', label: 'RAILWAY.REGIONS_TBILISI' },
   ];
 
+  sortColumn: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
+
   constructor(
     private svc: RailwayService,
     private router: Router,
@@ -52,6 +55,29 @@ export class RailwayListComponent implements OnInit {
       : this.trains.filter(t => t.direction === this.selectedDirection);
     this.currentPage = 1;
     this.applyPagination();
+  }
+
+  sort(column: string) {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+    this.filteredTrains.sort((a: any, b: any) => {
+      const valA = a[column]?.toString().toLowerCase() ?? '';
+      const valB = b[column]?.toString().toLowerCase() ?? '';
+      return this.sortDirection === 'asc'
+        ? valA.localeCompare(valB)
+        : valB.localeCompare(valA);
+    });
+    this.currentPage = 1;
+    this.applyPagination();
+  }
+
+  getSortIcon(column: string): string {
+    if (this.sortColumn !== column) return '↕';
+    return this.sortDirection === 'asc' ? '↑' : '↓';
   }
 
   applyPagination() {

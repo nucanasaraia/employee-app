@@ -2,9 +2,7 @@
   <div class="page-header">
     <h2>{{ 'RAILWAY.TITLE' | translate }}</h2>
     <div class="controls">
-      <select [(ngModel)]="selectedDirection"
-              (change)="filterByDirection()"
-              class="direction-select">
+      <select [(ngModel)]="selectedDirection" (change)="filterByDirection()" class="direction-select">
         <option *ngFor="let d of directions" [value]="d.value">
           {{ d.label | translate }}
         </option>
@@ -22,12 +20,22 @@
   <table class="train-table">
     <thead>
       <tr>
-        <th>{{ 'RAILWAY.TABLE.DIRECTIONS' | translate }}</th>
-        <th>{{ 'RAILWAY.TABLE.DEPARTURE' | translate }}</th>
-        <th>{{ 'RAILWAY.TABLE.ARRIVAL' | translate }}</th>
+        <th (click)="sort('direction')" class="sortable">
+          {{ 'RAILWAY.TABLE.DIRECTIONS' | translate }} {{ getSortIcon('direction') }}
+        </th>
+        <th (click)="sort('departure')" class="sortable">
+          {{ 'RAILWAY.TABLE.DEPARTURE' | translate }} {{ getSortIcon('departure') }}
+        </th>
+        <th (click)="sort('arrival')" class="sortable">
+          {{ 'RAILWAY.TABLE.ARRIVAL' | translate }} {{ getSortIcon('arrival') }}
+        </th>
         <th>{{ 'RAILWAY.TABLE.DESTINATION_TIME' | translate }}</th>
-        <th>{{ 'RAILWAY.TABLE.FLIGHT_NUMBER' | translate }}</th>
-        <th>{{ 'RAILWAY.TABLE.TICKETS' | translate }}</th>
+        <th (click)="sort('tripNumber')" class="sortable">
+          {{ 'RAILWAY.TABLE.FLIGHT_NUMBER' | translate }} {{ getSortIcon('tripNumber') }}
+        </th>
+        <th (click)="sort('tickets')" class="sortable">
+          {{ 'RAILWAY.TABLE.TICKETS' | translate }} {{ getSortIcon('tickets') }}
+        </th>
         <th>{{ 'RAILWAY.TABLE.ACTIONS' | translate }}</th>
       </tr>
     </thead>
@@ -64,22 +72,15 @@
 
   <!-- ── Pagination ─────────────────────────────────────── -->
   <div class="pagination" *ngIf="totalPages > 1">
-    <button (click)="goToPage(currentPage - 1)"
-            [disabled]="currentPage === 1"
-            class="page-btn">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-btn">
       ‹
     </button>
 
-    <button *ngFor="let p of getPages()"
-            (click)="goToPage(p)"
-            class="page-btn"
-            [class.page-active]="p === currentPage">
+    <button *ngFor="let p of getPages()" (click)="goToPage(p)" class="page-btn" [class.page-active]="p === currentPage">
       {{ p }}
     </button>
 
-    <button (click)="goToPage(currentPage + 1)"
-            [disabled]="currentPage === totalPages"
-            class="page-btn">
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="page-btn">
       ›
     </button>
 

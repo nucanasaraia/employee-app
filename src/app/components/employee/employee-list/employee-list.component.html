@@ -2,9 +2,8 @@
   <div class="page-header">
     <h2>{{ 'EMPLOYEE.TITLE' | translate }}</h2>
     <div class="controls">
-      <input [(ngModel)]="searchTerm" (input)="search()"
-             [placeholder]="'EMPLOYEE.SEARCH_PLACEHOLDER' | translate"
-             class="search-input" />
+      <input [(ngModel)]="searchTerm" (input)="search()" [placeholder]="'EMPLOYEE.SEARCH_PLACEHOLDER' | translate"
+        class="search-input" />
       <button (click)="clearSearch()" class="btn btn-clear">
         {{ 'EMPLOYEE.CLEAR' | translate }}
       </button>
@@ -21,10 +20,18 @@
   <table class="data-table">
     <thead>
       <tr>
-        <th>{{ 'EMPLOYEE.TABLE.NAME' | translate }}</th>
-        <th>{{ 'EMPLOYEE.TABLE.EMAIL' | translate }}</th>
-        <th>{{ 'EMPLOYEE.TABLE.POSITION' | translate }}</th>
-        <th>{{ 'EMPLOYEE.TABLE.SALARY' | translate }}</th>
+        <th (click)="sort('name')" class="sortable">
+          {{ 'EMPLOYEE.TABLE.NAME' | translate }} {{ getSortIcon('name') }}
+        </th>
+        <th (click)="sort('email')" class="sortable">
+          {{ 'EMPLOYEE.TABLE.EMAIL' | translate }} {{ getSortIcon('email') }}
+        </th>
+        <th (click)="sort('position')" class="sortable">
+          {{ 'EMPLOYEE.TABLE.POSITION' | translate }} {{ getSortIcon('position') }}
+        </th>
+        <th (click)="sort('salary')" class="sortable">
+          {{ 'EMPLOYEE.TABLE.SALARY' | translate }} {{ getSortIcon('salary') }}
+        </th>
         <th>{{ 'EMPLOYEE.TABLE.STATUS' | translate }}</th>
         <th>{{ 'EMPLOYEE.TABLE.ACTIONS' | translate }}</th>
       </tr>
@@ -68,22 +75,15 @@
 
   <!-- ── Pagination ─────────────────────────────────────── -->
   <div class="pagination" *ngIf="totalPages > 1">
-    <button (click)="goToPage(currentPage - 1)"
-            [disabled]="currentPage === 1"
-            class="page-btn">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-btn">
       ‹
     </button>
 
-    <button *ngFor="let p of getPages()"
-            (click)="goToPage(p)"
-            class="page-btn"
-            [class.page-active]="p === currentPage">
+    <button *ngFor="let p of getPages()" (click)="goToPage(p)" class="page-btn" [class.page-active]="p === currentPage">
       {{ p }}
     </button>
 
-    <button (click)="goToPage(currentPage + 1)"
-            [disabled]="currentPage === totalPages"
-            class="page-btn">
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="page-btn">
       ›
     </button>
 
