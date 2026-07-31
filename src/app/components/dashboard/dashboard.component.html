@@ -1,0 +1,127 @@
+<div class="dashboard">
+  <h2 class="dash-title">Dashboard</h2>
+
+  <div class="cards">
+
+    <!-- Employee cards -->
+    <div class="card" (click)="goTo('/employees')">
+      <div class="card-info">
+        <span class="card-label">Total Employees</span>
+        <span class="card-value">{{ totalEmployees }}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-info">
+        <span class="card-label">Active</span>
+        <span class="card-value">{{ activeEmployees }}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-info">
+        <span class="card-label">Deactivated</span>
+        <span class="card-value">{{ inactiveEmployees }}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-info">
+        <span class="card-label">Confirmed Employees</span>
+        <span class="card-value">{{ confirmedEmployees }}</span>
+      </div>
+    </div>
+
+    <!-- Train cards -->
+    <div class="card" (click)="goTo('/railway')">
+      <div class="card-info">
+        <span class="card-label">Total Trains</span>
+        <span class="card-value">{{ totalTrains }}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-info">
+        <span class="card-label">Tbilisi → Regions</span>
+        <span class="card-value">{{ tbilisiToRegions }}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-info">
+        <span class="card-label">Regions → Tbilisi</span>
+        <span class="card-value">{{ regionsToTbilisi }}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-info">
+        <span class="card-label">Confirmed Trains</span>
+        <span class="card-value">{{ confirmedTrains }}</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Bottom Section -->
+  <div class="dash-bottom">
+
+    <!-- Recent Employees -->
+    <div class="dash-section">
+      <div class="section-header">
+        <h3>Recent Employees</h3>
+        <button (click)="goTo('/employees')" class="see-all">See all →</button>
+      </div>
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="recentEmployees.length === 0">
+            <td colspan="3" class="empty">No employees yet.</td>
+          </tr>
+          <tr *ngFor="let e of recentEmployees">
+            <td>{{ e.name }}</td>
+            <td>{{ e.position }}</td>
+            <td>
+              <span class="badge" [class.badge-active]="e.isActive" [class.badge-inactive]="!e.isActive">
+                {{ e.isActive ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Recent Trains -->
+    <div class="dash-section">
+      <div class="section-header">
+        <h3>Recent Trains</h3>
+        <button (click)="goTo('/railway')" class="see-all">See all →</button>
+      </div>
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>Direction</th>
+            <th>Departure</th>
+            <th>Tickets</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="recentTrains.length === 0">
+            <td colspan="3" class="empty">No trains yet.</td>
+          </tr>
+          <tr *ngFor="let t of recentTrains">
+            <td>{{ t.direction }}</td>
+            <td>{{ t.departure }}</td>
+            <td>{{ t.tickets }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

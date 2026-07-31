@@ -17,6 +17,7 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';   
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConfirmDialogComponent,
     RailwayListComponent,
     RailwayFormComponent,
+    DashboardComponent, 
   ],
   imports: [
     BrowserModule,

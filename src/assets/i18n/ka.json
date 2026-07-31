@@ -1,7 +1,13 @@
 {
   "HEADER": {
+    "DASHBOARD": "მთავარი",
     "EMPLOYEE_MANAGEMENT": "თანამშრომლების მართვა",
+    "RAILWAY": "რკინიგზა",
     "RAILWAY_SCHEDULE": "მატარებლის განრიგი"
+  },
+  "SORT": {
+    "ASC": "ზრდადობით",
+    "DESC": "კლებადობით"
   },
   "EMPLOYEE": {
     "TITLE": "თანამშრომლების მართვა",
@@ -13,6 +19,7 @@
     "HIDE_HISTORY": "ისტორიის დამალვა",
     "SHOW_LOGS": "ლოგირება",
     "HIDE_LOGS": "დამალვა",
+    "SORT_BY": "დალაგება",
     "TABLE": {
       "NAME": "სახელი",
       "EMAIL": "ელ-ფოსტა",

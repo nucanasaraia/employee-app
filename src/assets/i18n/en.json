@@ -1,7 +1,13 @@
 {
   "HEADER": {
+    "DASHBOARD": "Dashboard",
     "EMPLOYEE_MANAGEMENT": "Employee Management",
+    "RAILWAY": "Railway",
     "RAILWAY_SCHEDULE": "Railway Schedule"
+  },
+  "SORT": {
+    "ASC": "Ascending",
+    "DESC": "Descending"
   },
   "EMPLOYEE": {
     "TITLE": "Employee Management",
@@ -13,6 +19,7 @@
     "HIDE_HISTORY": "Hide History",
     "SHOW_LOGS": "Show Activity Logs",
     "HIDE_LOGS": "Hide Logs",
+    "SORT_BY": "Sort by",
     "TABLE": {
       "NAME": "Name",
       "EMAIL": "Email",

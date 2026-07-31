@@ -5,9 +5,11 @@ import { EmployeeFormComponent } from './components/employee/employee-form/emplo
 import { EmployeeDetailComponent } from './components/employee/employee-detail/employee-detail.component';
 import { RailwayListComponent } from './components/railway/railway-list/railway-list.component';
 import { RailwayFormComponent } from './components/railway/railway-form/railway-form.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'employees', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard',            component: DashboardComponent },
   { path: 'employees',            component: EmployeeListComponent   },
   { path: 'employees/add',        component: EmployeeFormComponent   },
   { path: 'employees/edit/:id',   component: EmployeeFormComponent   },

@@ -27,8 +27,9 @@ export class EmployeeListComponent implements OnInit {
   totalPages: number = 1;
   pagedEmployees: Employee[] = [];
 
-  sortColumn: string= '';
+  sortColumn: string = 'name';
   sortDirection: 'asc' | 'desc' = 'asc';
+
 
   constructor(
     private svc: EmployeeService,
@@ -66,30 +67,17 @@ export class EmployeeListComponent implements OnInit {
     this.applyPagination();
   }
 
-  sort(column: string) {
-    if(this.sortColumn = column){
-      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-    }
-    else{
-      this.sortColumn = column;
-      this.sortDirection = 'asc';
-    }
 
+  onSortChange() {
     this.filteredEmployees.sort((a: any, b: any) => {
-      const valA = a[column]?.toString().toLowerCase() ?? '';
-      const valB = b[column]?.toString().toLowerCase() ?? '';
+      const valA = a[this.sortColumn]?.toString().toLowerCase() ?? '';
+      const valB = b[this.sortColumn]?.toString().toLowerCase() ?? '';
       return this.sortDirection === 'asc'
-        ? valA.localCompare(valB)
-        : valB.localCompare(valA);
+        ? valA.localeCompare(valB)
+        : valB.localeCompare(valA);
     });
-
     this.currentPage = 1;
     this.applyPagination();
-  }
-
-  getSortIcon(column: string): string{
-    if(this.sortColumn !== column) return '↕';
-    return this.sortDirection === 'asc' ? '↑' : '↓';
   }
 
   applyPagination() {

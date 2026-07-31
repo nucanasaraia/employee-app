@@ -12,27 +12,27 @@
 
 .header-inner {
   width: 100%;
-  max-width: 1100px;
-  margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .logo {
   display: flex;
   align-items: center;
   cursor: pointer;
+  margin-right: 8px;
 }
 
 .logo-img {
-  height: 36px;       
+  height: 36px;
   width: auto;
-}
-
-.nav {
-  display: flex;
-  justify-content: center;
 }
 
 .nav-select {
@@ -50,11 +50,37 @@
   border-color: #aaa;
 }
 
+.nav-active {
+  background: #f0f0f0 !important;
+  font-weight: 600;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-label {
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+}
+
+.nav-item button.nav-select {
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.nav-item button.nav-select:hover {
+  background: #f0f0f0;
+  border-color: #aaa;
+  color: #111;
+}
+
 .lang-switcher {
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-left: 16px;
 }
 
 .lang-btn {

@@ -7,6 +7,20 @@
           {{ d.label | translate }}
         </option>
       </select>
+
+      <select [(ngModel)]="sortColumn" (change)="onSortChange()" class="sort-select">
+        <option value="direction">{{ 'RAILWAY.TABLE.DIRECTIONS' | translate }}</option>
+        <option value="departure">{{ 'RAILWAY.TABLE.DEPARTURE' | translate }}</option>
+        <option value="arrival">{{ 'RAILWAY.TABLE.ARRIVAL' | translate }}</option>
+        <option value="tripNumber">{{ 'RAILWAY.TABLE.FLIGHT_NUMBER' | translate }}</option>
+        <option value="tickets">{{ 'RAILWAY.TABLE.TICKETS' | translate }}</option>
+      </select>
+
+      <select [(ngModel)]="sortDirection" (change)="onSortChange()" class="sort-select">
+        <option value="asc">{{ 'SORT.ASC' | translate }}</option>
+        <option value="desc">{{ 'SORT.DESC' | translate }}</option>
+      </select>
+
       <button (click)="exportTrains()" class="btn btn-excel" title="Export to Excel">
         <img src="assets/images/excel-icon.png" alt="Excel" style="height:16px; width:16px; margin-right:6px;" />
         {{ 'RAILWAY.EXPORT' | translate }}
@@ -20,22 +34,12 @@
   <table class="train-table">
     <thead>
       <tr>
-        <th (click)="sort('direction')" class="sortable">
-          {{ 'RAILWAY.TABLE.DIRECTIONS' | translate }} {{ getSortIcon('direction') }}
-        </th>
-        <th (click)="sort('departure')" class="sortable">
-          {{ 'RAILWAY.TABLE.DEPARTURE' | translate }} {{ getSortIcon('departure') }}
-        </th>
-        <th (click)="sort('arrival')" class="sortable">
-          {{ 'RAILWAY.TABLE.ARRIVAL' | translate }} {{ getSortIcon('arrival') }}
-        </th>
+        <th>{{ 'RAILWAY.TABLE.DIRECTIONS' | translate }}</th>
+        <th>{{ 'RAILWAY.TABLE.DEPARTURE' | translate }}</th>
+        <th>{{ 'RAILWAY.TABLE.ARRIVAL' | translate }}</th>
         <th>{{ 'RAILWAY.TABLE.DESTINATION_TIME' | translate }}</th>
-        <th (click)="sort('tripNumber')" class="sortable">
-          {{ 'RAILWAY.TABLE.FLIGHT_NUMBER' | translate }} {{ getSortIcon('tripNumber') }}
-        </th>
-        <th (click)="sort('tickets')" class="sortable">
-          {{ 'RAILWAY.TABLE.TICKETS' | translate }} {{ getSortIcon('tickets') }}
-        </th>
+        <th>{{ 'RAILWAY.TABLE.FLIGHT_NUMBER' | translate }}</th>
+        <th>{{ 'RAILWAY.TABLE.TICKETS' | translate }}</th>
         <th>{{ 'RAILWAY.TABLE.ACTIONS' | translate }}</th>
       </tr>
     </thead>
