@@ -13,15 +13,16 @@
       </select>
 
       <div class="nav-item">
-        <button (click)="goToRailway()"
-                class="nav-select"
-                [class.nav-active]="isRailwayActive">
+        <button (click)="goToRailway()" class="nav-select" [class.nav-active]="isRailwayActive">
           {{ 'HEADER.RAILWAY_SCHEDULE' | translate }}
         </button>
       </div>
     </div>
 
     <div class="lang-switcher">
+      <span class="current-user">{{ auth.getUser()?.username }}</span>
+      <button (click)="auth.logout()" class="lang-btn">Logout</button>
+      <span class="lang-divider">|</span>
       <button (click)="switchLanguage('en')" [class.lang-active]="currentLang === 'en'" class="lang-btn">EN</button>
       <span class="lang-divider">|</span>
       <button (click)="switchLanguage('ka')" [class.lang-active]="currentLang === 'ka'" class="lang-btn">ქა</button>

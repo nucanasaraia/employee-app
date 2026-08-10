@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,8 +16,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-
-    private translate: TranslateService
+    private translate: TranslateService,
+    public auth: AuthService
   ) {
     this.translate.setDefaultLang('en');
     this.translate.use('en');

@@ -25,7 +25,7 @@
         <img src="assets/images/excel-icon.png" alt="Excel" style="height:16px; width:16px; margin-right:6px;" />
         {{ 'RAILWAY.EXPORT' | translate }}
       </button>
-      <button (click)="goToAdd()" class="btn btn-add">
+      <button *ngIf="auth.isAdmin()" (click)="goToAdd()" class="btn btn-add">
         {{ 'RAILWAY.ADD_BUTTON' | translate }}
       </button>
     </div>
@@ -56,15 +56,17 @@
         <td>{{ t.tickets }}</td>
         <td class="actions">
           <ng-container *ngIf="!t.isConfirmed">
-            <button (click)="goToEdit(t.id!)" class="btn btn-edit">
-              {{ 'RAILWAY.BUTTONS.EDIT' | translate }}
-            </button>
-            <button (click)="delete(t.id!)" class="btn btn-del">
-              {{ 'RAILWAY.BUTTONS.DELETE' | translate }}
-            </button>
-            <button (click)="confirm(t.id!)" class="btn btn-confirm">
-              {{ 'RAILWAY.BUTTONS.CONFIRM' | translate }}
-            </button>
+            <ng-container *ngIf="auth.isAdmin()">
+              <button (click)="goToEdit(t.id!)" class="btn btn-edit">
+                {{ 'RAILWAY.BUTTONS.EDIT' | translate }}
+              </button>
+              <button (click)="delete(t.id!)" class="btn btn-del">
+                {{ 'RAILWAY.BUTTONS.DELETE' | translate }}
+              </button>
+              <button (click)="confirm(t.id!)" class="btn btn-confirm">
+                {{ 'RAILWAY.BUTTONS.CONFIRM' | translate }}
+              </button>
+            </ng-container>
           </ng-container>
           <span *ngIf="t.isConfirmed" class="confirmed-badge">
             🔒 {{ 'RAILWAY.CONFIRMED' | translate }}

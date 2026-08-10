@@ -18,7 +18,7 @@ export class EmployeeFormComponent implements OnInit {
     private svc: EmployeeService,
     private router: Router,
     private route: ActivatedRoute, 
-    private alert: AlertService 
+    private alert: AlertService, 
   ) {}
 
   ngOnInit() {

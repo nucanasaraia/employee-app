@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../../../models/employee.model';
 import { EmployeeService } from '../../../services/employee.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-employee-detail',
@@ -14,7 +15,8 @@ export class EmployeeDetailComponent implements OnInit {
   constructor(
     private svc: EmployeeService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public auth: AuthService
   ) {}
 
   ngOnInit() {

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Train } from 'src/app/models/train.model';
 import { AlertService } from 'src/app/services/alert.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmService } from 'src/app/services/confirm.service';
 import { ExcelService } from 'src/app/services/excel.service';
 import { RailwayService } from 'src/app/services/railway.service';
@@ -37,6 +38,7 @@ export class RailwayListComponent implements OnInit {
     private alert: AlertService,
     private confirmService: ConfirmService,
     private excel: ExcelService,
+    public auth: AuthService
   ) { }
 
   ngOnInit() { this.load(); }

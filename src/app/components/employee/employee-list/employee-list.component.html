@@ -2,9 +2,8 @@
   <div class="page-header">
     <h2>{{ 'EMPLOYEE.TITLE' | translate }}</h2>
     <div class="controls">
-      <input [(ngModel)]="searchTerm" (input)="search()"
-             [placeholder]="'EMPLOYEE.SEARCH_PLACEHOLDER' | translate"
-             class="search-input" />
+      <input [(ngModel)]="searchTerm" (input)="search()" [placeholder]="'EMPLOYEE.SEARCH_PLACEHOLDER' | translate"
+        class="search-input" />
       <button (click)="clearSearch()" class="btn btn-clear">
         {{ 'EMPLOYEE.CLEAR' | translate }}
       </button>
@@ -25,7 +24,7 @@
         <img src="assets/images/excel-icon.png" alt="Excel" style="height:16px; width:16px; margin-right:6px;" />
         {{ 'EMPLOYEE.EXPORT' | translate }}
       </button>
-      <button (click)="goToAdd()" class="btn btn-add">
+      <button *ngIf="auth.isAdmin()" (click)="goToAdd()" class="btn btn-add">
         {{ 'EMPLOYEE.ADD_BUTTON' | translate }}
       </button>
     </div>
@@ -38,7 +37,7 @@
         <th>{{ 'EMPLOYEE.TABLE.EMAIL' | translate }}</th>
         <th>{{ 'EMPLOYEE.TABLE.POSITION' | translate }}</th>
         <th>{{ 'EMPLOYEE.TABLE.SALARY' | translate }}</th>
-        <th>{{ 'EMPLOYEE.TABLE.STATUS' | translate }}</th>
+        <!-- <th>{{ 'EMPLOYEE.TABLE.STATUS' | translate }}</th> -->
         <th>{{ 'EMPLOYEE.TABLE.ACTIONS' | translate }}</th>
       </tr>
     </thead>
@@ -51,25 +50,29 @@
         <td>{{ e.email }}</td>
         <td>{{ e.position }}</td>
         <td>${{ e.salary }}</td>
-        <td>
+        <!-- <td>
           <span class="badge" [class.badge-active]="e.isActive" [class.badge-inactive]="!e.isActive">
             {{ e.isActive ? ('EMPLOYEE.STATUS.ACTIVE' | translate) : ('EMPLOYEE.STATUS.INACTIVE' | translate) }}
           </span>
-        </td>
+        </td> -->
         <td class="actions">
           <ng-container *ngIf="!e.isConfirmed">
             <button (click)="goToDetail(e.id!)" class="btn btn-view">
               {{ 'EMPLOYEE.BUTTONS.VIEW' | translate }}
             </button>
-            <button (click)="goToEdit(e.id!)" class="btn btn-edit">
-              {{ 'EMPLOYEE.BUTTONS.EDIT' | translate }}
-            </button>
-            <button (click)="delete(e.id!)" class="btn btn-del">
-              {{ 'EMPLOYEE.BUTTONS.DEACTIVATE' | translate }}
-            </button>
-            <button (click)="confirm(e.id!)" class="btn btn-confirm">
-              {{ 'EMPLOYEE.BUTTONS.CONFIRM' | translate }}
-            </button>
+
+            <!-- Admin only -->
+            <ng-container *ngIf="auth.isAdmin()">
+              <button (click)="goToEdit(e.id!)" class="btn btn-edit">
+                {{ 'EMPLOYEE.BUTTONS.EDIT' | translate }}
+              </button>
+              <button (click)="delete(e.id!)" class="btn btn-del">
+                {{ 'EMPLOYEE.BUTTONS.DEACTIVATE' | translate }}
+              </button>
+              <button (click)="confirm(e.id!)" class="btn btn-confirm">
+                {{ 'EMPLOYEE.BUTTONS.CONFIRM' | translate }}
+              </button>
+            </ng-container>
           </ng-container>
           <span *ngIf="e.isConfirmed" class="confirmed-badge">
             🔒 {{ 'EMPLOYEE.STATUS.CONFIRMED' | translate }}

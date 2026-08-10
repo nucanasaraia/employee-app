@@ -6,18 +6,20 @@ import { EmployeeDetailComponent } from './components/employee/employee-detail/e
 import { RailwayListComponent } from './components/railway/railway-list/railway-list.component';
 import { RailwayFormComponent } from './components/railway/railway-form/railway-form.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard',            component: DashboardComponent },
-  { path: 'employees',            component: EmployeeListComponent   },
-  { path: 'employees/add',        component: EmployeeFormComponent   },
-  { path: 'employees/edit/:id',   component: EmployeeFormComponent   },
-  { path: 'employees/detail/:id', component: EmployeeDetailComponent },
-  { path: 'railway',              component: RailwayListComponent    },
-  { path: 'railway/add',          component: RailwayFormComponent    },
-  { path: 'railway/edit/:id',     component: RailwayFormComponent    },
-
+  { path: 'login',                component: LoginComponent },
+  { path: '',                     redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard',            component: DashboardComponent,     canActivate: [AuthGuard] },
+  { path: 'employees',            component: EmployeeListComponent,  canActivate: [AuthGuard] },
+  { path: 'employees/add',        component: EmployeeFormComponent,  canActivate: [AuthGuard] },
+  { path: 'employees/edit/:id',   component: EmployeeFormComponent,  canActivate: [AuthGuard] },
+  { path: 'employees/detail/:id', component: EmployeeDetailComponent,canActivate: [AuthGuard] },
+  { path: 'railway',              component: RailwayListComponent,   canActivate: [AuthGuard] },
+  { path: 'railway/add',          component: RailwayFormComponent,   canActivate: [AuthGuard] },
+  { path: 'railway/edit/:id',     component: RailwayFormComponent,   canActivate: [AuthGuard] },
 ];
 
 @NgModule({

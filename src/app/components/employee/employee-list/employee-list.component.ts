@@ -6,6 +6,7 @@ import { EmployeeLog } from 'src/app/models/employee-log.model';
 import { AlertService } from 'src/app/services/alert.service';
 import { ConfirmService } from 'src/app/services/confirm.service';
 import { ExcelService } from 'src/app/services/excel.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -36,7 +37,8 @@ export class EmployeeListComponent implements OnInit {
     private router: Router,
     private alert: AlertService,
     private confirmService: ConfirmService,
-    private excel: ExcelService
+    private excel: ExcelService,
+    public auth: AuthService
   ) { }
   ngOnInit() { this.load(); }
 

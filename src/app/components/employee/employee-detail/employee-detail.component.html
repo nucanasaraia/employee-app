@@ -30,7 +30,7 @@
     </div>
 
     <div class="detail-actions">
-      <button (click)="goToEdit(employee.id!)" class="btn btn-edit">
+      <button *ngIf="auth.isAdmin()" (click)="goToEdit(employee.id!)" class="btn btn-edit">
         {{ 'EMPLOYEE.BUTTONS.EDIT' | translate }}
       </button>
       <button (click)="goBack()" class="btn btn-back">
