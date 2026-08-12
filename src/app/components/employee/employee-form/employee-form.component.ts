@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../../../models/employee.model';
 import { EmployeeService } from '../../../services/employee.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-employee-form',
@@ -17,17 +18,18 @@ export class EmployeeFormComponent implements OnInit {
   constructor(
     private svc: EmployeeService,
     private router: Router,
-    private route: ActivatedRoute, 
-    private alert: AlertService, 
-  ) {}
+    private route: ActivatedRoute,
+    private alert: AlertService,
+    private translate: TranslateService
+  ) { }
 
   ngOnInit() {
     //check if URL has an id /employees/edit/5
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.editingId = +id; 
+      this.editingId = +id;
       this.svc.getById(this.editingId).subscribe(data => {
-        this.form = { ...data };  
+        this.form = { ...data };
       });
     }
   }
@@ -48,27 +50,20 @@ export class EmployeeFormComponent implements OnInit {
     return Object.keys(this.errors).length === 0;
   }
 
-save() {
-  if (!this.validate()) return;
-
-  if (this.editingId) {
-    this.svc.update(this.editingId, this.form).subscribe({
-      next: () => {
-        this.alert.success('Employee updated successfully.');
+  save() {
+    if (!this.validate()) return;
+    if (this.editingId) {
+      this.svc.update(this.editingId, this.form).subscribe(() => {
+        this.alert.success(this.translate.instant('ALERTS.EMPLOYEE_UPDATED'));
         this.router.navigate(['/employees']);
-      },
-      error: () => this.alert.error('Failed to update employee. Please try again.')
-    });
-  } else {
-    this.svc.add(this.form).subscribe({
-      next: () => {
-        this.alert.success('Employee added successfully.');
+      });
+    } else {
+      this.svc.add(this.form).subscribe(() => {
+        this.alert.success(this.translate.instant('ALERTS.EMPLOYEE_ADDED'));
         this.router.navigate(['/employees']);
-      },
-      error: () => this.alert.error('Failed to add employee. Please try again.')
-    });
+      });
+    }
   }
-}
 
   cancel() { this.router.navigate(['/employees']); }
 }

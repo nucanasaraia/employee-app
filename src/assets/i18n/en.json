@@ -122,5 +122,28 @@
   "FOOTER": {
     "RIGHTS": "All Rights Reserved",
     "TERMS": "Terms and Conditions"
+  },
+  "ALERTS": {
+    "EMPLOYEE_ADDED": "Employee added successfully!",
+    "EMPLOYEE_UPDATED": "Employee updated successfully!",
+    "EMPLOYEE_DEACTIVATED": "Employee deactivated.",
+    "EMPLOYEE_CONFIRMED": "Employee confirmed. Row is now locked.",
+    "EMPLOYEE_EXPORTED": "Employees exported to Excel!",
+    "HISTORY_EXPORTED": "History exported to Excel!",
+    "TRAIN_ADDED": "Train schedule added!",
+    "TRAIN_UPDATED": "Train schedule updated!",
+    "TRAIN_DELETED": "Train schedule deleted.",
+    "TRAIN_CONFIRMED": "Train schedule confirmed and locked.",
+    "TRAIN_EXPORTED": "Train schedule exported to Excel!",
+    "FAILED_DELETE": "Failed to delete.",
+    "FAILED_CONFIRM": "Failed to confirm."
+  },
+  "CONFIRM": {
+    "DEACTIVATE_EMPLOYEE": "Are you sure you want to deactivate this employee?",
+    "CONFIRM_EMPLOYEE": "Are you sure you want to confirm this employee? This cannot be undone.",
+    "DELETE_TRAIN": "Are you sure you want to delete this train schedule?",
+    "CONFIRM_TRAIN": "Are you sure you want to confirm this train? This cannot be undone.",
+    "CANCEL": "Cancel",
+    "OK": "OK"
   }
 }

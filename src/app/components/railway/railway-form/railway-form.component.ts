@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Train } from '../../../models/train.model';
 import { RailwayService } from '../../../services/railway.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-railway-form',
@@ -23,8 +24,9 @@ export class RailwayFormComponent implements OnInit {
     private svc: RailwayService,
     private router: Router,
     private route: ActivatedRoute,
-    private alert: AlertService
-  ) {}
+    private alert: AlertService,
+    private translate: TranslateService
+  ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -36,11 +38,11 @@ export class RailwayFormComponent implements OnInit {
 
   validate(): boolean {
     this.errors = {};
-    if (!this.form.direction)       this.errors.direction       = 'Direction is required.';
-    if (!this.form.departure)       this.errors.departure       = 'Departure time is required.';
-    if (!this.form.arrival)         this.errors.arrival         = 'Arrival time is required.';
+    if (!this.form.direction) this.errors.direction = 'Direction is required.';
+    if (!this.form.departure) this.errors.departure = 'Departure time is required.';
+    if (!this.form.arrival) this.errors.arrival = 'Arrival time is required.';
     if (!this.form.travelTime) this.errors.travelTime = 'Travel time is required.';
-    if (!this.form.tripNumber)    this.errors.tripNumber    = 'Trip number is required.';
+    if (!this.form.tripNumber) this.errors.tripNumber = 'Trip number is required.';
     if (!this.form.tickets || this.form.tickets <= 0) this.errors.tickets = 'Tickets must be greater than 0.';
     return Object.keys(this.errors).length === 0;
   }
@@ -48,20 +50,14 @@ export class RailwayFormComponent implements OnInit {
   save() {
     if (!this.validate()) return;
     if (this.editingId) {
-      this.svc.update(this.editingId, this.form).subscribe({
-        next: () => {
-          this.alert.success('Train updated successfully.');
-          this.router.navigate(['/railway']);
-        },
-        error: () => this.alert.error('Failed to update train. Please try again.')
+      this.svc.update(this.editingId, this.form).subscribe(() => {
+        this.alert.success(this.translate.instant('ALERTS.TRAIN_UPDATED'));
+        this.router.navigate(['/railway']);
       });
     } else {
-      this.svc.add(this.form).subscribe({
-        next: () => {
-          this.alert.success('Train added successfully.');
-          this.router.navigate(['/railway']);
-        },
-        error: () => this.alert.error('Failed to add train. Please try again.')
+      this.svc.add(this.form).subscribe(() => {
+        this.alert.success(this.translate.instant('ALERTS.TRAIN_ADDED'));
+        this.router.navigate(['/railway']);
       });
     }
   }

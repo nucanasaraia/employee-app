@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Train } from 'src/app/models/train.model';
 import { AlertService } from 'src/app/services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -38,7 +39,8 @@ export class RailwayListComponent implements OnInit {
     private alert: AlertService,
     private confirmService: ConfirmService,
     private excel: ExcelService,
-    public auth: AuthService
+    public auth: AuthService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() { this.load(); }
@@ -97,44 +99,44 @@ export class RailwayListComponent implements OnInit {
   }
 
   async delete(id: number) {
-    const confirmed = await this.confirmService.confirm('Delete this train schedule?');
+    const message = this.translate.instant('CONFIRM.DELETE_TRAIN');
+    const confirmed = await this.confirmService.confirm(message);
     if (!confirmed) return;
 
     this.svc.delete(id).subscribe({
       next: () => {
-        this.alert.success('Train schedule deleted.');
+        this.alert.error(this.translate.instant('ALERTS.TRAIN_DELETED'));
         this.load();
       },
-      error: () => this.alert.error('Failed to delete train schedule.')
+      error: () => this.alert.error(this.translate.instant('ALERTS.FAILED_DELETE'))
     });
   }
 
   async confirm(id: number) {
-    const confirmed = await this.confirmService.confirm('Confirm this train schedule? This cannot be undone.');
+    const message = this.translate.instant('CONFIRM.CONFIRM_TRAIN');
+    const confirmed = await this.confirmService.confirm(message);
     if (!confirmed) return;
 
     this.svc.confirm(id).subscribe({
       next: () => {
-        this.alert.info('Train schedule confirmed and locked.');
+        this.alert.info(this.translate.instant('ALERTS.TRAIN_CONFIRMED'));
         this.load();
       },
-      error: () => this.alert.error('Failed to confirmation.')
-    })
+      error: () => this.alert.error(this.translate.instant('ALERTS.FAILED_CONFIRM'))
+    });
   }
 
-  //excel
   exportTrains() {
     const data = this.filteredTrains.map(t => ({
       'ID': t.id,
       'Direction': t.direction,
       'Departure': t.departure,
       'Arrival': t.arrival,
-      'Travel Time': t.travelTime,
-      'Trip Number': t.tripNumber,
+      'Destination Time': t.travelTime,
+      'Flight Number': t.tripNumber,
       'Tickets': t.tickets
     }));
-
     this.excel.exportToExcel(data, 'TrainSchedule', 'Trains');
-    this.alert.success('Train schedule exported to Excel!');
+    this.alert.success(this.translate.instant('ALERTS.TRAIN_EXPORTED'));
   }
 }

@@ -2,8 +2,8 @@
   <div class="confirm-box">
     <p class="confirm-message">{{ message }}</p>
     <div class="confirm-actions">
-      <button class="confirm-btn confirm-cancel" (click)="respond(false)">Cancel</button>
-      <button class="confirm-btn confirm-ok" (click)="respond(true)">Delete</button>
+      <button class="confirm-btn confirm-cancel" (click)="respond(false)">{{ 'CONFIRM.CANCEL' | translate }}</button>
+      <button class="confirm-btn confirm-ok" (click)="respond(true)">{{ 'CONFIRM.OK' | translate }}</button>
     </div>
   </div>
 </div>

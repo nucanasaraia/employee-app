@@ -7,6 +7,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { ConfirmService } from 'src/app/services/confirm.service';
 import { ExcelService } from 'src/app/services/excel.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-employee-list',
@@ -38,7 +39,8 @@ export class EmployeeListComponent implements OnInit {
     private alert: AlertService,
     private confirmService: ConfirmService,
     private excel: ExcelService,
-    public auth: AuthService
+    public auth: AuthService,
+    private translate: TranslateService
   ) { }
   ngOnInit() { this.load(); }
 
@@ -113,32 +115,33 @@ export class EmployeeListComponent implements OnInit {
   goToDetail(id: number) { this.router.navigate(['/employees/detail', id]); }
 
   async delete(id: number) {
-    const confirmed = await this.confirmService.confirm('Delete this employee?');
+    const message = this.translate.instant('CONFIRM.DEACTIVATE_EMPLOYEE');
+    const confirmed = await this.confirmService.confirm(message);
     if (!confirmed) return;
 
     this.svc.delete(id).subscribe({
       next: () => {
-        this.alert.success('Employee deleted.');
+        this.alert.warning(this.translate.instant('ALERTS.EMPLOYEE_DEACTIVATED'));
         this.load();
       },
-      error: () => this.alert.error('Failed to delete employee.')
+      error: () => this.alert.error(this.translate.instant('ALERTS.FAILED_DELETE'))
     });
   }
 
   async confirm(id: number) {
-    const confirmed = await this.confirmService.confirm('Are you sure you want to confirm this employee? This cannot be undone.');
+    const message = this.translate.instant('CONFIRM.CONFIRM_EMPLOYEE');
+    const confirmed = await this.confirmService.confirm(message);
     if (!confirmed) return;
 
     this.svc.confirm(id).subscribe({
       next: () => {
-        this.alert.info('Employee confirmed. Row is now locked.');
+        this.alert.info(this.translate.instant('ALERTS.EMPLOYEE_CONFIRMED'));
         this.load();
       },
-      error: () => this.alert.error('Failed to confirmation.')
-    })
+      error: () => this.alert.error(this.translate.instant('ALERTS.FAILED_CONFIRM'))
+    });
   }
 
-  //excel
   exportEmployees() {
     const data = this.filteredEmployees.map(e => ({
       'ID': e.id,
@@ -148,9 +151,8 @@ export class EmployeeListComponent implements OnInit {
       'Salary': e.salary,
       'Status': e.isActive ? 'Active' : 'Inactive'
     }));
-
     this.excel.exportToExcel(data, 'Employees', 'Employees');
-    this.alert.success('Employees exported to Excel!');
+    this.alert.success(this.translate.instant('ALERTS.EMPLOYEE_EXPORTED'));
   }
 
   exportHistory() {
@@ -162,11 +164,9 @@ export class EmployeeListComponent implements OnInit {
       'Salary': e.salary,
       'Status': e.isActive ? 'Active' : 'Inactive'
     }));
-
     this.excel.exportToExcel(data, 'Employees_History', 'History');
-    this.alert.success('History exported to Excel!');
+    this.alert.success(this.translate.instant('ALERTS.HISTORY_EXPORTED'));
   }
-
 
 
   toggleLogs() {
