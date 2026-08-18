@@ -56,4 +56,17 @@ export class HeaderComponent implements OnInit {
   goHome() {
     this.router.navigate(['/dashboard']);
   }
+
+  logout() {                              
+    this.auth.logout().subscribe({
+      next: () => {
+        this.auth.clearUser();
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        this.auth.clearUser();
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 }

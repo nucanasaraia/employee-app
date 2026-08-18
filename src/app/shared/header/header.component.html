@@ -21,7 +21,7 @@
 
     <div class="lang-switcher">
       <span class="current-user">{{ auth.getUser()?.username }}</span>
-      <button (click)="auth.logout()" class="lang-btn">Logout</button>
+      <button (click)="logout()" class="lang-btn">Logout</button>
       <span class="lang-divider">|</span>
       <button (click)="switchLanguage('en')" [class.lang-active]="currentLang === 'en'" class="lang-btn">EN</button>
       <span class="lang-divider">|</span>

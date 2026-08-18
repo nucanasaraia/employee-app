@@ -22,11 +22,28 @@
   margin-bottom: 20px;
 }
 
-h2 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #222;
+.tabs {
+  display: flex;
   margin-bottom: 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: #888;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tab-active {
+  color: #222;
+  font-weight: 600;
+  border-bottom: 2px solid #333;
 }
 
 .field {
@@ -58,6 +75,15 @@ h2 {
   color: #c62828;
   font-size: 13px;
   margin-bottom: 12px;
+  text-align: left;
+}
+
+.success {
+  display: block;
+  color: #2e7d32;
+  font-size: 13px;
+  margin-bottom: 12px;
+  text-align: left;
 }
 
 .btn-login {
