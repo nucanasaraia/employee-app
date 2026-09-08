@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { AuthResponse } from '../models/AuthResponse';
+import { RoleModel } from '../models/role.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -15,12 +16,16 @@ export class AuthService {
     if (saved) this.currentUser = JSON.parse(saved);
   }
 
-  register(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, { username, password, roleId: 2 });
+  register(username: string, password: string, roleId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, { username, password, roleId });
   }
 
   login(username: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { username, password });
+  }
+
+  getRoles(): Observable<RoleModel[]> {
+    return this.http.get<RoleModel[]>(`${this.apiUrl}/roles`);
   }
 
   logout(): Observable<any> {
@@ -44,6 +49,19 @@ export class AuthService {
   isAdmin(): boolean {
     return this.currentUser?.role === 'Admin';
   }
+
+  isManager(): boolean {
+    return this.currentUser?.role === 'Manager';
+  }
+
+  isAdminOrManager(): boolean {
+    return this.isAdmin() || this.isManager();
+  }
+
+  getRole(): string {
+    return this.currentUser?.role ?? '';
+  }
+
   isLoggedIn(): boolean {
     return this.currentUser !== null && this.currentUser.token !== '';
   }

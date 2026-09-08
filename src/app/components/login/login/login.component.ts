@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { retry } from 'rxjs';
+import { RoleModel } from 'src/app/models/role.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -21,11 +22,24 @@ export class LoginComponent {
   regError: string = '';
   regSuccess: string = '';
 
+  roles: RoleModel[] = [];
+  selectedRoleId: number = 2;
 
   constructor(
     private auth: AuthService,
     private router: Router
   ) { }
+
+
+   ngOnInit() {
+    this.loadRoles();
+  }
+
+  loadRoles() {
+    this.auth.getRoles().subscribe(data => {
+      this.roles = data;
+    });
+  }
 
   login() {
     if (!this.loginUsername || !this.loginPassword) {
@@ -63,12 +77,14 @@ export class LoginComponent {
       return;
     }
 
-    this.auth.register(this.regUsername, this.regPassword).subscribe({
+
+    this.auth.register(this.regUsername, this.regPassword, this.selectedRoleId).subscribe({
       next: () => {
         this.regSuccess = 'Account created! You can now sign in.';
         this.regUsername = '';
         this.regPassword = '';
         this.regConfirm = '';
+        this.selectedRoleId = 2;
         setTimeout(() => this.activeTab = 'login', 1500);
       },
       error: (err) => {

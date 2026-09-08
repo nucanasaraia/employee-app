@@ -60,12 +60,13 @@
             <button (click)="goToDetail(e.id!)" class="btn btn-view">
               {{ 'EMPLOYEE.BUTTONS.VIEW' | translate }}
             </button>
-
-            <!-- Admin only -->
-            <ng-container *ngIf="auth.isAdmin()">
+            <ng-container *ngIf="auth.isAdminOrManager()">
               <button (click)="goToEdit(e.id!)" class="btn btn-edit">
                 {{ 'EMPLOYEE.BUTTONS.EDIT' | translate }}
               </button>
+            </ng-container>
+            <!-- Admin only -->
+            <ng-container *ngIf="auth.isAdmin()">
               <button (click)="delete(e.id!)" class="btn btn-del">
                 {{ 'EMPLOYEE.BUTTONS.DEACTIVATE' | translate }}
               </button>
