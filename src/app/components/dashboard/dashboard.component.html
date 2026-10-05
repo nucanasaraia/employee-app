@@ -63,7 +63,7 @@
 
   </div>
 
-  <!-- ── Bottom Section -->
+  <!-- ── Bottom Section ───────────────────────────────────── -->
   <div class="dash-bottom">
 
     <!-- Recent Employees -->
@@ -123,5 +123,54 @@
         </tbody>
       </table>
     </div>
+
   </div>
+
+  <!-- ── Role Management — Admin only ─────────────────────── -->
+  <div *ngIf="auth.isAdmin()" class="dash-section" style="margin-top:24px;">
+    <div class="section-header">
+      <h3>Role Management</h3>
+    </div>
+
+    <!-- Add new role -->
+    <div class="role-add">
+      <input [(ngModel)]="newRoleName"
+             placeholder="Enter new role name"
+             class="role-input" />
+      <button (click)="addRoles()" class="btn btn-add">
+        + Add Role
+      </button>
+    </div>
+    <small *ngIf="roleError" class="error" style="display:block; margin-top:6px;">
+      {{ roleError }}
+    </small>
+
+    <!-- Roles table -->
+    <table class="dash-table" style="margin-top:16px;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Role Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="roles.length === 0">
+          <td colspan="3" class="empty">No roles found.</td>
+        </tr>
+        <tr *ngFor="let role of roles">
+          <td>{{ role.id }}</td>
+          <td>{{ role.name }}</td>
+          <td>
+            <button (click)="deleteRole(role.id)"
+                    class="btn btn-del"
+                    [disabled]="role.name === 'Admin' || role.name === 'User'">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>

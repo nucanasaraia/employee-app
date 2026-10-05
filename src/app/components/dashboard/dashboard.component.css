@@ -147,3 +147,30 @@
 .badge-inactive { background: #c62828; }
 .badge-action   { padding: 2px 8px; border-radius: 12px; font-size: 11px; }
 
+/* ── Role Management ─────────────────────────────────────── */
+.role-add {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.role-input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  width: 220px;
+}
+
+.role-input:focus { border-color: #aaa; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .cards       { grid-template-columns: repeat(2, 1fr); }
+  .dash-bottom { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 500px) {
+  .cards { grid-template-columns: 1fr; }
+}

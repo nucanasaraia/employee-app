@@ -28,6 +28,14 @@ export class AuthService {
     return this.http.get<RoleModel[]>(`${this.apiUrl}/roles`);
   }
 
+addRoles(role: RoleModel): Observable<any> {
+  return this.http.post(`${this.apiUrl}/roles`, role);
+}
+
+deleteRole(id: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/roles/${id}`);
+}
+
   logout(): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.getToken()}`

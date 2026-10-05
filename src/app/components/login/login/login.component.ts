@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { retry } from 'rxjs';
 import { RoleModel } from 'src/app/models/role.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   activeTab: 'login' | 'register' = 'login';
 
   loginUsername: string = '';
@@ -24,14 +23,15 @@ export class LoginComponent {
 
   roles: RoleModel[] = [];
   selectedRoleId: number = 2;
+  newRoleName = '';
+  roleError: string = '';
 
   constructor(
     private auth: AuthService,
     private router: Router
   ) { }
 
-
-   ngOnInit() {
+  ngOnInit() {
     this.loadRoles();
   }
 
@@ -77,7 +77,6 @@ export class LoginComponent {
       return;
     }
 
-
     this.auth.register(this.regUsername, this.regPassword, this.selectedRoleId).subscribe({
       next: () => {
         this.regSuccess = 'Account created! You can now sign in.';
@@ -111,7 +110,6 @@ export class LoginComponent {
     if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password))
       return 'Password must contain at least one special character (!@#$%...).';
 
-    return null;  
+    return null;
   }
-
 }
